@@ -27,12 +27,15 @@ app.get('/api/config', (req, res) => {
   res.json({ mapsApiKey: process.env.MAPS_API_KEY });
 });
 
-app.get("/api/test-firebase", async (req, res) => {
+app.get("/api/debug-firebase", async (req, res) => {
   try {
-    await db.collection("test").doc("ping").set({ ok: true });
-    res.json({ success: true });
-  } catch (err) {
-    res.json({ success: false, error: err.message });
+    const SA = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    res.json({ 
+      project_id: SA.project_id,
+      client_email: SA.client_email
+    });
+  } catch(err) {
+    res.json({ error: err.message });
   }
 });
 
