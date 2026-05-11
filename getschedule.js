@@ -15,7 +15,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const app = express();
-
+app.use(express.json());
 
 app.get('/api/config', (req, res) => {
   res.json({ mapsApiKey: process.env.MAPS_API_KEY });
@@ -24,8 +24,6 @@ app.get('/api/config', (req, res) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(__dirname));
-app.use(express.json());
 
 const churches = JSON.parse(fs.readFileSync("./churchdata.json"));
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -63,11 +61,17 @@ app.post("/api/reviews/:id", async (req, res) => {
   res.json({ ok: true });
 });
 
-// GET AI overview of reviews for a church
 app.get("/api/reviews/:id/overview", async (req, res) => {
-  const reviews = loadReviews();
-  const churchReviews = reviews[req.params.id] || [];
   const church = churches.find(c => c.id === req.params.id);
+
+  const snapshot = await db
+    .collection("churches")
+    .doc(req.params.id)
+    .collection("reviews")
+    .orderBy("date", "desc")
+    .get();
+
+  const churchReviews = snapshot.docs.map(doc => doc.data());
 
   if (!churchReviews.length) {
     return res.json({ overview: "No reviews yet for this parish." });
@@ -91,6 +95,7 @@ ${reviewText}`
 
   res.json({ overview: message.content[0].text });
 });
+
 
 // ICS schedule route
 app.get("/api/schedule/:id", async (req, res) => {
@@ -118,3 +123,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+app.use(express.static(__dirname));
