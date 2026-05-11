@@ -125,3 +125,13 @@ app.listen(PORT, () => {
 });
 
 app.use(express.static(__dirname));
+
+
+app.get("/api/test-firebase", async (req, res) => {
+  try {
+    const test = await db.collection("test").doc("ping").set({ ok: true });
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false, error: err.message });
+  }
+});
