@@ -1,12 +1,17 @@
+import 'dotenv/config';
 import admin from "firebase-admin";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import ical from "node-ical";
 import Anthropic from "@anthropic-ai/sdk";
-import 'dotenv/config';
+import fs from "fs";
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 const db = admin.firestore();
 const app = express();

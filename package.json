@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.19.2",
+    "firebase": "^12.13.0",
     "firebase-admin": "^13.9.0",
     "node-ical": "^0.26.1",
     "pg": "^8.20.0"
