@@ -3,6 +3,7 @@ node_modules/
 
 # environment variables
 .env
+serviceAccountKey.json
 
 # logs
 npm-debug.log*
