@@ -39,20 +39,30 @@ app.get("/api/debug-firebase", async (req, res) => {
   }
 });
 
-app.get("/api/reviews/:id", async (req, res) => {
+app.post("/api/reviews/:id", async (req, res) => {
+  const { text, author } = req.body;
+  if (!text || !text.trim()) {
+    return res.status(400).json({ error: "Review text required" });
+  }
   try {
-    const snapshot = await db
+    console.log("Writing to project:", serviceAccount.project_id);
+    const ref = await db
       .collection("churches")
       .doc(req.params.id)
       .collection("reviews")
-      .orderBy("date", "desc")
-      .get();
-    const reviews = snapshot.docs.map(doc => doc.data());
-    res.json(reviews);
+      .add({
+        text: text.trim(),
+        author: author?.trim() || "Anonymous",
+        date: new Date().toISOString()
+      });
+    console.log("Success! Doc ID:", ref.id);
+    res.json({ ok: true, id: ref.id });
   } catch (err) {
+    console.error("FIREBASE ERROR:", err.code, err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.post("/api/reviews/:id", async (req, res) => {
   const { text, author } = req.body;
