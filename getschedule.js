@@ -57,7 +57,9 @@ app.post("/api/reviews/:id", async (req, res) => {
     return res.status(400).json({ error: "Review text required" });
   }
   try {
-    await db
+    console.log("Attempting to write to Firebase...");
+    console.log("Church ID:", req.params.id);
+    const ref = await db
       .collection("churches")
       .doc(req.params.id)
       .collection("reviews")
@@ -66,8 +68,10 @@ app.post("/api/reviews/:id", async (req, res) => {
         author: author?.trim() || "Anonymous",
         date: new Date().toISOString()
       });
-    res.json({ ok: true });
+    console.log("Written with ID:", ref.id);
+    res.json({ ok: true, id: ref.id });
   } catch (err) {
+    console.error("Firebase write error:", err);
     res.status(500).json({ error: err.message });
   }
 });
