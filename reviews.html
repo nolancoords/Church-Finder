@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parish Reviews — Orthodox NC</title>
+  <link rel="icon" href="https://i.etsystatic.com/19318850/r/il/35c539/7360181136/il_570xN.7360181136_ruho.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #0d1e3d;
+      --royal:      #1a3a6e;
+      --cobalt:     #1e4fc2;
+      --gold:       #c9a227;
+      --gold-light: #e8c84a;
+      --white:      #fdfbf5;
+      --off-white:  #f0ead8;
+      --text-dark:  #0d1e3d;
+      --text-mid:   #2c4a80;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'EB Garamond', Georgia, serif; background: var(--white); color: var(--text-dark); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,30,61,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,162,39,0.3);
+      padding: 0 2rem; display: flex; align-items: center;
+      justify-content: space-between; height: 64px;
+    }
+    .nav-logo { font-family: 'Cinzel Decorative', serif; font-size: 1rem; color: var(--gold-light); }
+    .nav-back {
+      font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(253,251,245,0.75); text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-back:hover { color: var(--gold-light); }
+
+    .page-header {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--royal) 100%);
+      padding: 4rem 2rem 3rem; text-align: center;
+    }
+    .page-label { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.75rem; }
+    .page-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 3vw, 2.4rem); color: var(--white); margin-bottom: 1rem; }
+    .page-rule { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+
+    .grid-section { padding: 4rem 2rem; background: var(--off-white); }
+    .church-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--white); border: 1px solid rgba(201,162,39,0.2);
+      border-top: 4px solid var(--gold); padding: 1.5rem;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,30,61,0.12); }
+    .review-card-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,30,61,0.82);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.25s;
+      font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-light);
+      flex-direction: column; gap: 0.5rem;
+    }
+    .review-card:hover .review-card-overlay { opacity: 1; }
+    .review-card-overlay svg { width: 28px; height: 28px; stroke: var(--gold-light); fill: none; stroke-width: 1.5; }
+
+    .card-jurisdiction { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.5rem; }
+    .card-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .card-city { font-family: 'Josefin Sans', sans-serif; font-size: 0.82rem; color: var(--text-mid); display: flex; align-items: center; gap: 0.3rem; }
+    .card-city::before { content: '✦'; color: var(--gold); font-size: 0.55rem; }
+    .card-review-count { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(201,162,39,0.2); font-family: 'Josefin Sans', sans-serif; font-size: 0.78rem; color: var(--text-mid); }
+    .card-review-count span { color: var(--gold); font-weight: 600; }
+
+    /* Modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(13,30,61,0.85); z-index: 200;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); width: min(560px, 95vw);
+      max-height: 90vh; overflow-y: auto;
+      border-top: 4px solid var(--gold); padding: 2.5rem;
+      position: relative; animation: modalIn 0.3s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-size: 1.5rem;
+      cursor: pointer; color: var(--text-mid); line-height: 1;
+    }
+    .modal-close:hover { color: var(--navy); }
+    .modal-church-name { font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .modal-church-city { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; }
+    .modal-rule { height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 1.5rem; }
+
+    .modal-section-head { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.75rem; }
+
+    .review-form { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .review-form input, .review-form textarea {
+      font-family: 'EB Garamond', serif; font-size: 1rem;
+      background: rgba(13,30,61,0.04); border: 1px solid rgba(201,162,39,0.35);
+      color: var(--text-dark); padding: 0.75rem 1rem; outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .review-form input::placeholder, .review-form textarea::placeholder { color: rgba(13,30,61,0.35); }
+    .review-form input:focus, .review-form textarea:focus { border-color: var(--gold); }
+    .review-form textarea { resize: vertical; min-height: 100px; }
+    .submit-btn {
+      font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 0.85rem 2rem; border: none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy); cursor: pointer; transition: all 0.2s; align-self: flex-start;
+    }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,162,39,0.35); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .existing-reviews { display: flex; flex-direction: column; gap: 1rem; }
+    .review-entry {
+      padding: 1rem; border: 1px solid rgba(201,162,39,0.18);
+      background: rgba(201,162,39,0.04); border-left: 3px solid var(--gold);
+    }
+    .review-entry-author { font-family: 'Josefin Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .review-entry-date { font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem; color: var(--text-mid); margin-bottom: 0.5rem; }
+    .review-entry-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-dark); }
+    .no-reviews { font-family: 'Josefin Sans', sans-serif; font-size: 0.85rem; color: var(--text-mid); font-style: italic; padding: 1rem 0; }
+
+    .success-msg { font-family: 'Josefin Sans', sans-serif; font-size: 0.85rem; color: #2d6b2d; padding: 0.75rem 1rem; background: rgba(45,107,45,0.08); border: 1px solid rgba(45,107,45,0.2); margin-bottom: 1rem; display: none; }
+    .success-msg.show { display: block; }
+
+    footer { background: var(--navy); color: rgba(253,251,245,0.6); text-align: center; padding: 2.5rem 2rem; border-top: 1px solid rgba(201,162,39,0.25); }
+    .footer-cross { font-size: 1.8rem; color: var(--gold); margin-bottom: 0.75rem; }
+    footer p { font-size: 0.82rem; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">☩ GOC North Carolina</div>
+    <a href="thing.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Directory
+    </a>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-label">Community Voice</div>
+    <h1 class="page-title">Parish Reviews</h1>
+    <div class="page-rule"></div>
+  </div>
+
+  <section class="grid-section">
+    <div class="church-grid" id="churchGrid">
+      <p style="font-family:'Josefin Sans',sans-serif; color:var(--text-mid); padding:2rem 0;">Loading parishes…</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-cross">☩</div>
+    <p>Share your experience to help fellow faithful find their parish community.</p>
+  </footer>
+
+  <!-- Review Modal -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    let churches = [];
+    let reviewCounts = {};
+    let currentChurchId = null;
+
+    async function init() {
+      try {
+        const res = await fetch('churchdata.json');
+        churches = await res.json();
+      } catch (e) {
+        churches = [];
+      }
+      await loadAllReviewCounts();
+      renderGrid();
+    }
+
+    async function loadAllReviewCounts() {
+      await Promise.all(churches.map(async c => {
+        try {
+          const r = await fetch(`/api/reviews/${c.id}`);
+          const reviews = await r.json();
+          reviewCounts[c.id] = reviews.length;
+        } catch { reviewCounts[c.id] = 0; }
+      }));
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('churchGrid');
+      grid.innerHTML = churches.map(c => `
+        <div class="review-card" onclick="openReviewModal('${c.id}')">
+          <div class="review-card-overlay">
+            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Review this church
+          </div>
+          <div class="card-jurisdiction">${c.jurisdiction || ''}</div>
+          <div class="card-name">${c.name}</div>
+          <div class="card-city">${c.city}, NC</div>
+          <div class="card-review-count">
+            <span>${reviewCounts[c.id] || 0}</span> review${reviewCounts[c.id] === 1 ? '' : 's'}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function openReviewModal(id) {
+      currentChurchId = id;
+      const church = churches.find(c => c.id === id);
+      if (!church) return;
+
+      const modal = document.getElementById('modal');
+      const content = document.getElementById('modalContent');
+      modal.classList.add('open');
+
+      let reviews = [];
+      try {
+        const r = await fetch(`/api/reviews/${id}`);
+        reviews = await r.json();
+      } catch {}
+
+      const reviewsHTML = reviews.length
+        ? reviews.map(r => `
+            <div class="review-entry">
+              <div class="review-entry-author">☩ ${r.author}</div>
+              <div class="review-entry-date">${new Date(r.date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })}</div>
+              <div class="review-entry-text">${r.text}</div>
+            </div>
+          `).join('')
+        : `<p class="no-reviews">No reviews yet — be the first to share your experience.</p>`;
+
+      content.innerHTML = `
+        <div class="modal-church-name">${church.name}</div>
+        <div class="modal-church-city">☩ ${church.city}, North Carolina</div>
+        <div class="modal-rule"></div>
+
+        <div class="modal-section-head">Leave a Review</div>
+        <div class="success-msg" id="successMsg">☩ Thank you — your review has been submitted.</div>
+        <div class="review-form">
+          <input type="text" id="reviewAuthor" placeholder="Your name (optional)" />
+          <textarea id="reviewText" placeholder="Share your experience visiting this parish…"></textarea>
+          <button class="submit-btn" id="submitBtn" onclick="submitReview()">☩ Submit Review</button>
+        </div>
+
+        <div class="modal-section-head">What People Are Saying</div>
+        <div class="existing-reviews" id="existingReviews">
+          ${reviewsHTML}
+        </div>
+      `;
+    }
+
+    async function submitReview() {
+      const text = document.getElementById('reviewText').value.trim();
+      const author = document.getElementById('reviewAuthor').value.trim();
+      if (!text) { document.getElementById('reviewText').focus(); return; }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      try {
+        await fetch(`/api/reviews/${currentChurchId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, author })
+        });
+
+        document.getElementById('reviewText').value = '';
+        document.getElementById('reviewAuthor').value = '';
+        document.getElementById('successMsg').classList.add('show');
+
+        // Refresh reviews list
+        const r = await fetch(`/api/reviews/${currentChurchId}`);
+        const reviews = await r.json();
+        reviewCounts[currentChurchId] = reviews.length;
+
+        document.getElementById('existingReviews').innerHTML = reviews.map(rv => `
+          <div class="review-entry">
+            <div class="review-entry-author">☩ ${rv.author}</div>
+            <div class="review-entry-date">${new Date(rv.date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })}</div>
+            <div class="review-entry-text">${rv.text}</div>
+          </div>
+        `).join('');
+
+        renderGrid();
+      } catch (e) {
+        alert('Failed to submit review. Please try again.');
+      }
+
+      btn.disabled = false;
+      btn.textContent = '☩ Submit Review';
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('open');
+        currentChurchId = null;
+      }
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+[
+    {
+      "id": "holy-trinity-charlotte",
+      "jurisdiction": "GOARCH",
+      "name": "Holy Trinity Greek Orthodox Cathedral",
+      "patron": "Holy Trinity",
+      "city": "Charlotte",
+      "state": "NC",
+      "address": "600 East Blvd, Charlotte, NC 28203",
+      "phone": "(704) 334-4771",
+      "website": "https://holytrinitycharlotte.org",
+      "lat": 35.2131,
+      "lng": -80.8401,
+      "contactInfo": {
+        "Fr. Johnathan": {"name": "Fr. Johnathan Resmini",
+        "rank": "Proistamenos",
+        "email": "frjonathan@htgo.org",
+        "phone": "(704)334-4771" }, 
+        "Fr. Elefterios": {"name": "Fr. Elefterios Plevrakis",
+        "rank": "Ephemerios",
+        "email": "frElefterios@htgo.org",
+        "phone": "(704)334-4771"
+      }},
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/office.htgoc%40gmail.com/public/basic.ics",
+      "services": [
+        "Sunday Orthros: 9:00 AM",
+        "Divine Liturgy: 10:00 AM",
+        "Great Vespers: Sat 6:00 PM"
+      ],
+      "languages": ["English", "Greek"]
+    },
+        {
+      "id": "annunciation-winston",
+      "name": "Annunciation Greek Orthodox Church",
+      "jurisdiction": "GOARCH",
+      "patron": "Annunciation of the Theotokos",
+      "city": "Winston-Salem",
+      "state": "NC",
+      "address": "123 Main St, Winston-Salem, NC 27101",
+      "phone": "(704) 334-4771",
+      "website": "https://www.wsgoc.org/",
+      "lat": 36.087968032931876,
+      "lng": -80.30554617456707,
+      "contactInfo": {
+        "Fr. Minas": {"name": "Fr. Minas Tsambounieris",
+        "rank": "Proistamenos",
+        "email": "frminas@wsgoc.org",
+        "phone": "(216)394-8499 (Emergency Cases ONLY)" }, 
+        "Fr. Nicholas": {"name": "Fr. Nicolaos Spirakis",
+        "rank": "Ephemerios",
+        "email": "frnicolaos@wsgoc.org"
+      }}, 
+      
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/c_016efb180c078ea86746499e65b3b2cf3c059b10173a687ae4904efa2bce6e74%40group.calendar.google.com/public/basic.ics",
+      "services": [
+        "Sunday Orthros: 8:45 AM",
+        "Divine Liturgy: 10:00 AM"
+      ],
+      "languages": ["English", "Greek"]
+    },
+    {
+      "id": "saint-nektarios-charlotte",
+      "name": "Saint Nektarios Orthodox Church",
+      "jurisdiction": "GOARCH",
+      "patron": "Annunciation of the Theotokos",
+      "city": "Charlotte",
+      "state": "NC",
+      "address": "524 S Kings Dr, Charlotte, NC 28204",
+      "phone": "(704)333-6183",
+      "website": "https://www.stnektarios.org/",
+      "contactInfo": {
+        "Fr. Andreas": {"name": "Fr. Andreas Houpos",
+        "rank": "Proistamenos",
+        "email": "fr.andreas@stnektarios.org",
+        "appointment": "https://calendly.com/fr-andreas" }, 
+        "Fr. Panayiotis": {"name": "Fr. Panayiotis Steele",
+        "rank": "Ephemerios",
+        "email": "fr.panayiotis@stnektarios.org"
+      }}, 
+      "lat": 35.2193,
+      "lng": -80.8307,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/77184b754f14730ef2b081debe362b556eb74023138590b9aa8086dc31785418%40group.calendar.google.com/public/basic.ics",
+      "services": [
+        "Divine Liturgy: Sun 10:00 AM",
+        "Vespers: Sat 6:30 PM"
+      ],
+      "languages": ["English", "Greek"]
+    },
+    {
+      "id": "saint-thomas-tabbaccoville",
+      "name": "Saint Thomas Orthodox Church",
+      "jurisdiction": "ROCOR",
+      "patron": "Saint Thomas the Apostle",
+      "city": "Tabbaccoville",
+      "state": "NC",
+      "address": "6151 Tobaccoville Rd, Tobaccoville, NC 27050",
+      "phone": "(304)888-4576",
+      "website": "https://rocorws.com/",
+      "contactInfo": {
+        "Fr. Mark": {"name": "Fr. Mark",
+        "rank": "Proistamenos",
+        "email": "fathermark677@yahoo.com",
+        "phone": "(304)888-4576"
+      }}, 
+      "lat": 36.2153562782655,
+      "lng": -80.38822669946688,
+      "hasCalendar": true,
+      "calendarId": "77184b754f14730ef2b081debe362b556eb74023138590b9aa8086dc31785418@group.calendar.google.com",
+      "services": [
+        "Hours: Sun 9:40 AM", 
+        "Divine Liturgy: Sun 10:00 AM",
+        "Vigil: Sat 6:30 PM"
+      ],
+      "languages": ["English"]
+    },
+    {
+      "id": "saint-basil-kernersville",
+      "name": "Saint Basil of Ostrog Orthodox Church",
+      "jurisdiction": "Serbian",
+      "patron": "Saint Basil of Ostrog",
+      "city": "Kernersville",
+      "state": "NC",
+      "address": "270 Ogden School Rd, Kernersville, NC 27284",
+      "phone": "(304)888-4576",
+      "website": "https://www.stbasilnc.org/",
+      "contactInfo": {
+        "Fr. Boris": {"name": "Fr. Boris",
+        "rank": "Proistamenos",
+        "email": "stbasilofostrog@gmail.com"
+      }}, 
+      "lat": 36.063462532128526,
+      "lng": -80.07874309039875,
+      "hasCalendar": true,
+      "calendarId": "77184b754f14730ef2b081debe362b556eb74023138590b9aa8086dc31785418@group.calendar.google.com",
+      "services": [
+        "Devine Liturgy: Sun 9:30 AM"
+      ],
+      "languages": ["Serbian"]
+    },
+    {
+      "id": "saint-simeon-charlotte",
+      "name": "St. Simeon Serbian Orthodox Church",
+      "jurisdiction": "Serbian",
+      "patron": "Saint Basil of Ostrog",
+      "city": "Charlotte",
+      "state": "NC",
+      "address": "7609 Mallard Creek Rd, Charlotte, NC 28262",
+      "phone": "(231) 774-6366",
+      "website": "https://www.sv-simeon.com/",
+      "contactInfo": {
+        "Church Email": {
+          "email": "info@sv-simeon.com"
+      }}, 
+      "lat": 35.33489851989916,
+      "lng":  -80.78944460861939,
+      "hasCalendar": true,
+      "calendarId": "77184b754f14730ef2b081debe362b556eb74023138590b9aa8086dc31785418@group.calendar.google.com",
+      "services": [
+        "Divine Liturgy: Sun 9:30 AM", 
+        "Akathist: Tue 7:00 PM"
+      ], 
+      "languages": ["Serbian"]
+    },
+
+    {
+      "id": "holy-cross-kernersville",
+      "name": "Holy Cross Orthodox Church Orthodox Church",
+      "jurisdiction": "OCA",
+      "patron": "Holy Cross",
+      "city": "Kernersville",
+      "state": "NC",
+      "address": "1320 Masten Dr, Kernersville, NC 27284",
+      "phone": "(336) 688-9920",
+      "website": "https://www.holycrossoca.org/",
+      "contactInfo": {
+        "Fr. Christopher": {"name": "Fr. Christopher",
+        "rank": "Proistamenos",
+        "email": "frc@holycrossoca.org"
+      }}, 
+      "lat": 36.10501881289699,
+      "lng":  -80.09765010489922,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/afdjpnlh2daeemgldrnqs5og4c%40group.calendar.google.com/public/basic.ics",
+      "services": [
+        "Hours: Sun 9:30 AM", 
+        "Divine Liturgy: Sun 10:00 AM"
+      ], 
+      "languages": ["English"]
+    },
+    {
+      "id": "dormition-greensboro",
+      "name": "Dormition of the Theotokos Church Orthodox Church",
+      "jurisdiction": "GOARCH",
+      "patron": "The Dormition ",
+      "city": "Greensboro",
+      "state": "NC",
+      "address": "800 Westridge Rd, Greensboro, NC 27410",
+      "phone": "(336) 688-9920",
+      "website": "https://www.holycrossoca.org/",
+      "contactInfo": {
+        "Fr. Sarantis": {"name": "Fr. Sarantis P. Loulakis",
+        "rank": "Proistamenos",
+        "email": "patersarantis@yahoo.com",
+        "phone": "(336) 292-8013"
+      }}, 
+      "lat": 36.11333142461119,
+      "lng": -79.86866414314215,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/dormitiongso%40gmail.com/public/basic.ics",
+      "services": [
+        "Orthros: Sun 8:45 AM", 
+        "Divine Liturgy: Sun 10:00 AM"
+      ], 
+      "languages": ["English", "Greek", "Arabic*"]
+    }
+  ]
+
+
+
+
+
+     
