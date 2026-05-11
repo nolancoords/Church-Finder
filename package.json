@@ -5,8 +5,8 @@
   "description": "Greek Orthodox Churches of North Carolina — parish directory",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "npx nodemon server.js"
+    "start": "node getschedule.js",
+    "dev": "npx nodemon getschedule.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.1",
@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.19.2",
+    "firebase-admin": "^13.9.0",
     "node-ical": "^0.26.1"
   }
 }

@@ -1,3 +1,16 @@
+import admin from "firebase-admin";
+import fs from "fs";
+
+const serviceAccount = JSON.parse(
+  fs.readFileSync("./serviceAccountKey.json", "utf8")
+);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const db = admin.firestore();
+
 import express from "express";
 import fs from "fs";
 import path from "path";
@@ -21,36 +34,38 @@ app.use(express.static(__dirname));
 app.use(express.json());
 
 const churches = JSON.parse(fs.readFileSync("./churchdata.json"));
-const REVIEWS_FILE = "./reviews.json";
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-function loadReviews() {
-  try { return JSON.parse(fs.readFileSync(REVIEWS_FILE)); }
-  catch { return {}; }
-}
-function saveReviews(data) {
-  fs.writeFileSync(REVIEWS_FILE, JSON.stringify(data, null, 2));
-}
 
-// GET all reviews for a church
-app.get("/api/reviews/:id", (req, res) => {
-  const reviews = loadReviews();
-  res.json(reviews[req.params.id] || []);
+app.get("/api/reviews/:id", async (req, res) => {
+  const snapshot = await db
+    .collection("churches")
+    .doc(req.params.id)
+    .collection("reviews")
+    .orderBy("date", "desc")
+    .get();
+
+  const reviews = snapshot.docs.map(doc => doc.data());
+  res.json(reviews);
 });
 
-// POST a new review
-app.post("/api/reviews/:id", (req, res) => {
+app.post("/api/reviews/:id", async (req, res) => {
   const { text, author } = req.body;
-  if (!text || !text.trim()) return res.status(400).json({ error: "Review text required" });
 
-  const reviews = loadReviews();
-  if (!reviews[req.params.id]) reviews[req.params.id] = [];
-  reviews[req.params.id].push({
-    text: text.trim(),
-    author: author?.trim() || "Anonymous",
-    date: new Date().toISOString()
-  });
-  saveReviews(reviews);
+  if (!text || !text.trim()) {
+    return res.status(400).json({ error: "Review text required" });
+  }
+
+  await db
+    .collection("churches")
+    .doc(req.params.id)
+    .collection("reviews")
+    .add({
+      text: text.trim(),
+      author: author?.trim() || "Anonymous",
+      date: new Date().toISOString()
+    });
+
   res.json({ ok: true });
 });
 
