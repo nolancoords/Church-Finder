@@ -70,7 +70,7 @@ app.post("/api/reviews/:id", async (req, res) => {
     return res.status(400).json({ error: "Review text required" });
   }
   try {
-    console.log("Attempting to write to Firebase...");
+    console.log("PROJECT:", serviceAccount.project_id);
     console.log("Church ID:", req.params.id);
     const ref = await db
       .collection("churches")
