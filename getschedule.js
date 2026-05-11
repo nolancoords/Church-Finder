@@ -27,51 +27,27 @@ app.get('/api/config', (req, res) => {
   res.json({ mapsApiKey: process.env.MAPS_API_KEY });
 });
 
-app.get("/api/debug-firebase", async (req, res) => {
+app.get("/api/reviews/:id", async (req, res) => {
   try {
-    const SA = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    res.json({ 
-      project_id: SA.project_id,
-      client_email: SA.client_email
-    });
-  } catch(err) {
-    res.json({ error: err.message });
-  }
-});
-
-app.post("/api/reviews/:id", async (req, res) => {
-  const { text, author } = req.body;
-  if (!text || !text.trim()) {
-    return res.status(400).json({ error: "Review text required" });
-  }
-  try {
-    console.log("Writing to project:", serviceAccount.project_id);
-    const ref = await db
+    const snapshot = await db
       .collection("churches")
       .doc(req.params.id)
       .collection("reviews")
-      .add({
-        text: text.trim(),
-        author: author?.trim() || "Anonymous",
-        date: new Date().toISOString()
-      });
-    console.log("Success! Doc ID:", ref.id);
-    res.json({ ok: true, id: ref.id });
+      .orderBy("date", "desc")
+      .get();
+    const reviews = snapshot.docs.map(doc => doc.data());
+    res.json(reviews);
   } catch (err) {
-    console.error("FIREBASE ERROR:", err.code, err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
-
 app.post("/api/reviews/:id", async (req, res) => {
   const { text, author } = req.body;
   if (!text || !text.trim()) {
     return res.status(400).json({ error: "Review text required" });
   }
   try {
-    console.log("PROJECT:", serviceAccount.project_id);
-    console.log("Church ID:", req.params.id);
     const ref = await db
       .collection("churches")
       .doc(req.params.id)
@@ -81,10 +57,8 @@ app.post("/api/reviews/:id", async (req, res) => {
         author: author?.trim() || "Anonymous",
         date: new Date().toISOString()
       });
-    console.log("Written with ID:", ref.id);
     res.json({ ok: true, id: ref.id });
   } catch (err) {
-    console.error("Firebase write error:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -145,4 +119,4 @@ app.use(express.static(__dirname));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});//cache bust Mon May 11 19:09:02 EDT 2026
+});
