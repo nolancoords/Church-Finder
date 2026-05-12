@@ -163,8 +163,6 @@
     }
     .btn-outline:hover { background: rgba(253,251,245,0.08); border-color: var(--gold); color: var(--gold-light); }
 
-    .btn-language-filter { background: rgba(253,251,245,0.08); color: var(--white); border: 1px solid rgba(253,251,245,0.4); padding: 0.5rem 1rem; font-size: 0.75rem; letter-spacing: 0.1em;} 
-
     .scroll-hint {
       position: absolute;
       bottom: 2rem;
@@ -254,6 +252,7 @@
     .search-section .section-label { color: var(--gold-light); font-weight: 200; }
     .section-title--about { color: var(--white); font-weight: 100; }
 
+    /* ── AUTOCOMPLETE SEARCH ── */
     .search-bar-wrap {
       max-width: 680px;
       margin: 0 auto 2rem;
@@ -282,6 +281,67 @@
       pointer-events: none;
     }
 
+    /* Autocomplete dropdown */
+    .autocomplete-list {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--navy);
+      border: 1px solid rgba(201,162,39,0.4);
+      border-top: none;
+      z-index: 50;
+      max-height: 260px;
+      overflow-y: auto;
+      display: none;
+    }
+    .autocomplete-list.open { display: block; }
+    .autocomplete-item {
+      padding: 0.75rem 1.2rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      border-bottom: 1px solid rgba(201,162,39,0.1);
+      transition: background 0.15s;
+    }
+    .autocomplete-item:last-child { border-bottom: none; }
+    .autocomplete-item:hover, .autocomplete-item.highlighted {
+      background: rgba(201,162,39,0.12);
+    }
+    .autocomplete-item-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      color: var(--white);
+    }
+    .autocomplete-item-name mark {
+      background: transparent;
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+    .autocomplete-item-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(253,251,245,0.45);
+    }
+    .autocomplete-clear {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(253,251,245,0.4);
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+      display: none;
+      z-index: 2;
+    }
+    .autocomplete-clear.visible { display: block; }
+    .autocomplete-clear:hover { color: var(--gold); }
+
     .filter-pills {
       display: flex;
       flex-wrap: wrap;
@@ -302,25 +362,24 @@
       cursor: pointer;
       transition: all 0.25s;
     }
-
-    .pill2 {
-    padding: 10px 16px;
-    border-radius: 999px;
-    border: 1px solid #aaa214;
-    background: white;
-    cursor: pointer;
-    white-space: nowrap; /* prevents weird text wrapping inside button */
-    transition: all 0.2s ease;
-  }
-
-  .pill2:hover {
-    background: #f2f2f2;
-  }
-
     .pill:hover, .pill.active {
       background: var(--gold);
       color: var(--navy);
       border-color: var(--gold);
+    }
+
+    /* ── JURISDICTION BADGE COLORS ── */
+    /* These map jurisdiction keys to accent colors used in cards & pills */
+    :root {
+      --j-goarch:    #0d5eaf;   /* Greek blue */
+      --j-rocor:     #c0392b;   /* Russian red */
+      --j-oca:       #b22234;   /* American red-blue */
+      --j-antioch:   #009a44;   /* Antiochian green */
+      --j-serbian:   #c6363c;   /* Serbian red */
+      --j-bulgarian: #00734a;   /* Bulgarian green */
+      --j-romanian:  #002B7F;   /* Romanian blue */
+      --j-ukrainian: #005BBB;   /* Ukrainian blue */
+      --j-default:   #1a3a6e;
     }
 
     /* ── MAP ── */
@@ -368,20 +427,6 @@
     .card-city { font-size: 0.85rem; color: var(--text-mid); display: flex; align-items: center; gap: 0.3rem; }
     .card-city::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
 
-
-
-    .card-dropdown { 
-      margin-top: 0.8rem;
-      padding: 0.8rem;
-      background: rgba(201,162,39,0.06);
-      border: 1px solid rgba(201,162,39,0.2);
-      display: none;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  
-    .card-dropdown.open { display: flex; }
-    .card-dropdown.btn { margin-top: 0; padding: 0.5rem 1rem; background: transparent; border: none; color: var(--navy); text-align: left; }
     /* ── CHURCH GRID ── */
     .churches-section { background: var(--white); }
     .church-grid {
@@ -402,25 +447,73 @@
       box-shadow: 0 12px 40px rgba(13,30,61,0.12);
       transform: translateY(-4px);
     }
+
+    /* ── TOP BAR — jurisdiction color coding ── */
     .card-top-bar {
-      height: 6px;
-      background: linear-gradient(90deg, #1a3a6e, #ffffff, #1a3a6e);
+      height: 7px;
+      background: linear-gradient(90deg, var(--j-default), #4a8fd4, var(--j-default));
     }
     [data-jurisdiction="GOARCH"] .card-top-bar {
-      background: linear-gradient(90deg, #0d5eaf, #ffffff, #0d5eaf);
+      background: linear-gradient(90deg, #0d5eaf, #ffffff 50%, #0d5eaf);
     }
     [data-jurisdiction="ROCOR"] .card-top-bar {
-      background: linear-gradient(90deg, #ffffff, #1c3f8f, #d52b1e);
+      background: linear-gradient(90deg, #ffffff 20%, #1c3f8f 50%, #d52b1e 80%);
     }
     [data-jurisdiction="OCA"] .card-top-bar {
-      background: linear-gradient(90deg, #b22234, #ffffff, #3c3b6e);
+      background: linear-gradient(90deg, #b22234 30%, #ffffff 50%, #3c3b6e 70%);
     }
-    [data-jurisdiction="Antioch"] .card-top-bar {
-      background: linear-gradient(90deg, #d52b1e, #ffffff, #009a44);
+    [data-jurisdiction="Antioch"] .card-top-bar,
+    [data-jurisdiction="AOCANA"] .card-top-bar,
+    [data-jurisdiction="Antiochian"] .card-top-bar {
+      background: linear-gradient(90deg, #d52b1e 25%, #ffffff 50%, #009a44 75%);
     }
     [data-jurisdiction="Serbian"] .card-top-bar {
-      background: linear-gradient(90deg, #c6363c, #0c4076, #c6363c);
+      background: linear-gradient(90deg, #c6363c 25%, #0c4076 50%, #c6363c 75%);
     }
+    [data-jurisdiction="Bulgarian"] .card-top-bar {
+      background: linear-gradient(90deg, #ffffff 20%, #00734a 50%, #d62612 80%);
+    }
+    [data-jurisdiction="Romanian"] .card-top-bar {
+      background: linear-gradient(90deg, #002B7F 25%, #FCD116 50%, #CE1126 75%);
+    }
+    [data-jurisdiction="Ukrainian"] .card-top-bar {
+      background: linear-gradient(90deg, #005BBB 40%, #FFD500 60%);
+    }
+    [data-jurisdiction="Coptic"] .card-top-bar {
+      background: linear-gradient(90deg, #ce1126 25%, #ffffff 50%, #000000 75%);
+    }
+    [data-jurisdiction="Ethiopian"] .card-top-bar {
+      background: linear-gradient(90deg, #078930 25%, #FCDD09 50%, #DA121A 75%);
+    }
+
+    /* Jurisdiction badge chip on card */
+    .jurisdiction-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+    /* chip colors per jurisdiction */
+    .chip-GOARCH     { background: #0d5eaf; }
+    .chip-ROCOR      { background: #c0392b; }
+    .chip-OCA        { background: #3c3b6e; }
+    .chip-Antioch,
+    .chip-AOCANA,
+    .chip-Antiochian { background: #009a44; }
+    .chip-Serbian    { background: #c6363c; }
+    .chip-Bulgarian  { background: #00734a; }
+    .chip-Romanian   { background: #002B7F; }
+    .chip-Ukrainian  { background: #005BBB; }
+    .chip-Coptic     { background: #8B0000; }
+    .chip-Ethiopian  { background: #078930; }
+    .chip-default    { background: var(--royal); }
 
     .card-body { padding: 1.5rem; }
     .card-patron { font-family: 'Josefin Sans', sans-serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem; }
@@ -458,7 +551,6 @@
       border-left: 2px solid rgba(201,162,39,0.3);
     }
 
-    /* Priest info row */
     .card-priest-row {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 0.8rem;
@@ -468,10 +560,7 @@
       flex-direction: column;
       gap: 0.25rem;
     }
-    .card-priest-name {
-      font-weight: 600;
-      color: var(--navy);
-    }
+    .card-priest-name { font-weight: 600; color: var(--navy); }
     .card-priest-rank {
       font-size: 0.72rem;
       letter-spacing: 0.1em;
@@ -512,7 +601,6 @@
     }
     .card-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* Calendar badge */
     .has-calendar {
       position: absolute;
       top: 1rem;
@@ -524,6 +612,46 @@
       letter-spacing: 0.1em;
       padding: 0.25rem 0.6rem;
       text-transform: uppercase;
+    }
+
+    /* ── SEE MORE ── */
+    .see-more-wrap {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      text-align: center;
+    }
+    .see-more-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.5rem;
+      background: transparent;
+      border: 1px solid rgba(13,30,61,0.3);
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .see-more-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 4px 16px rgba(201,162,39,0.12);
+    }
+    .see-more-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+    .results-count {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
     }
 
     /* ── SCHEDULE MODAL ── */
@@ -583,7 +711,6 @@
       margin-bottom: 0.75rem;
     }
 
-    /* Priest modal block */
     .modal-priest-block {
       background: rgba(201,162,39,0.06);
       border: 1px solid rgba(201,162,39,0.2);
@@ -706,6 +833,7 @@
       <div class="hero-cta">
         <a href="#churches" class="btn btn-gold">☩ Find a Church</a>
         <a href="#map-section" class="btn btn-outline">View Map</a>
+      </div>
     </div>
     <div class="scroll-hint">
       <span>Scroll</span>
@@ -724,27 +852,37 @@
     <div class="search-bar-wrap">
       <span class="search-icon">⌕</span>
       <input type="text" class="search-bar" id="searchInput"
-             placeholder="Search by city, name, or patron…" oninput="filterChurches()">
+             placeholder="Search by city, name, or patron…"
+             autocomplete="off"
+             oninput="onSearchInput()"
+             onkeydown="onSearchKeydown(event)"
+             onfocus="showAutocomplete()"
+             onblur="hideAutocomplete()">
+      <button class="autocomplete-clear" id="searchClear" onclick="clearSearch()">×</button>
+      <div class="autocomplete-list" id="autocompleteList"></div>
     </div>
-    <div class="section-label": style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.75rem;">Location</div>
+
+    <div class="section-label" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.75rem;">Location</div>
     <div class="filter-pills" id="filterPills">
       <button class="pill active" onclick="setFilter('all', this)">All Parishes</button>
       <button class="pill" onclick="setFilter('Charlotte', this)">Charlotte</button>
       <button class="pill" onclick="setFilter('Raleigh', this)">Raleigh</button>
       <button class="pill" onclick="setFilter('Greensboro', this)">Greensboro</button>
     </div>
-    <div class="section-label": style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.75rem;">Jurisdiction</div>
+
+    <div class="section-label" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:1.5rem;">Jurisdiction</div>
     <div style="display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; max-width:800px; margin:1rem auto 0;">
       <button class="pill active" id="jurisAllBtn"
         onclick="setJurisdictionFilter('all', this)">All Jurisdictions</button>
       <span id="jurisdictionFilters" style="display:contents;"></span>
     </div>
-    <div class="section-label": style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.75rem;">Languages</div>
-<div id="languageFilters" style="display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; max-width:800px; margin:1rem auto 0;">
-  <button class="pill active" onclick="setLanguageFilter('all', this)">All Languages</button>
-  <button class="pill" onclick="setLanguageFilter('Bilingual', this)">Bilingual</button>
-  <button class="pill" onclick="setLanguageFilter('English', this)">English Only</button>
-  </div>
+
+    <div class="section-label" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:1.5rem;">Languages</div>
+    <div id="languageFilters" style="display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; max-width:800px; margin:1rem auto 0;">
+      <button class="pill active" onclick="setLanguageFilter('all', this)">All Languages</button>
+      <button class="pill" onclick="setLanguageFilter('Bilingual', this)">Bilingual</button>
+      <button class="pill" onclick="setLanguageFilter('English', this)">English Only</button>
+    </div>
   </section>
 
   <!-- ── MAP ── -->
@@ -768,11 +906,23 @@
   </section>
 
   <!-- ── CHURCH GRID ── -->
-  <section class="churches-section" style="padding-top: 5rem;">
+  <section class="churches-section" style="padding-top: 5rem;" id="church-grid-section">
     <div class="section-label">Parishes</div>
     <h2 class="section-title">All Churches</h2>
     <div class="section-rule"></div>
+    <div class="results-count" id="resultsCount" style="text-align:center;"></div>
     <div class="church-grid" id="churchGrid"></div>
+    <div class="see-more-wrap" id="seeMoreWrap" style="display:none;">
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:0.75rem;letter-spacing:0.15em;
+                  color:var(--text-mid);text-transform:uppercase;margin-bottom:0.75rem;"
+           id="seeMoreCounter"></div>
+      <button class="see-more-btn" id="seeMoreBtn" onclick="loadMore()">
+        ☩ Show More Parishes
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </button>
+    </div>
   </section>
 
   <!-- ── ABOUT ── -->
@@ -796,7 +946,7 @@
     <div class="footer-cross">☩</div>
     <div class="footer-title">Orthodox Churches of North Carolina</div>
     <p>Data sourced from individual parish Google Calendars.<br>
-       To add or update a listing, <a href="nolancoords@gmail.com">contact us</a>.</p>
+       To add or update a listing, <a href="mailto:nolancoords@gmail.com">contact us</a>.</p>
     <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">
       &copy; <span id="year"></span> — Orthodox Christian Community Directory
     </p>
@@ -815,19 +965,22 @@
 
   <script>
     /* ─────────────────────────────────────────────────
-       CONFIG — replace with your own key
-    ───────────────────────────────────────────────── */
-
-    /* ─────────────────────────────────────────────────
        GLOBALS
     ───────────────────────────────────────────────── */
-    let churches     = [];
-    let filtered     = [];
-    let activeFilter = 'all';
+    let churches         = [];
+    let filtered         = [];
+    let activeFilter     = 'all';
     let activeJurisdiction = 'all';
-    let googleMap    = null;
-    let markers      = [];
-    let activeLanguage = 'all'; 
+    let activeLanguage   = 'all';
+    let googleMap        = null;
+    let markers          = [];
+
+    // Pagination
+    const PAGE_SIZE      = 9;
+    let visibleCount     = PAGE_SIZE;
+
+    // Autocomplete
+    let acHighlight      = -1;
 
     /* ─────────────────────────────────────────────────
        LOAD DATA
@@ -840,7 +993,6 @@
         churches = [];
         console.warn('churchdata.json not found:', e);
       }
-
       filtered = [...churches];
       renderJurisdictionFilter();
       renderGrid();
@@ -848,18 +1000,17 @@
     }
 
     /* ─────────────────────────────────────────────────
-       getPriestInfo
+       PRIEST HELPERS
     ───────────────────────────────────────────────── */
     function getPriestInfo(churchId) {
       const church = churches.find(c => c.id === churchId);
       if (!church || !church.contactInfo) return [];
-
       return Object.values(church.contactInfo)
         .map(p => ({
-          name:  p.name  || '',
-          rank:  p.rank  || '',
-          email: p.email || '',
-          phone: p.phone || '',
+          name:        p.name  || '',
+          rank:        p.rank  || '',
+          email:       p.email || '',
+          phone:       p.phone || '',
           appointment: p.appointment || ''
         }))
         .sort((a, b) => {
@@ -870,16 +1021,138 @@
     }
 
     /* ─────────────────────────────────────────────────
-       Get Language info
+       JURISDICTION CHIP COLOR
     ───────────────────────────────────────────────── */
-    async function setLanguageFilter(lang, btn) {
-      activeLanguage = lang;
-      
-      document.querySelectorAll('#languageFilters .pill')
-        .forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
+    function chipClass(j) {
+      if (!j) return 'chip-default';
+      // Normalise common variations
+      const map = {
+        'goarch': 'chip-GOARCH',
+        'rocor':  'chip-ROCOR',
+        'oca':    'chip-OCA',
+        'antioch': 'chip-Antioch', 'aocana': 'chip-Antioch', 'antiochian': 'chip-Antioch',
+        'serbian': 'chip-Serbian',
+        'bulgarian': 'chip-Bulgarian',
+        'romanian': 'chip-Romanian',
+        'ukrainian': 'chip-Ukrainian',
+        'coptic': 'chip-Coptic',
+        'ethiopian': 'chip-Ethiopian',
+      };
+      return map[j.toLowerCase()] || 'chip-default';
+    }
+
+    /* ─────────────────────────────────────────────────
+       AUTOCOMPLETE
+    ───────────────────────────────────────────────── */
+    function getSuggestions(q) {
+      if (!q || q.length < 1) return [];
+      const lower = q.toLowerCase();
+      return churches
+        .filter(c =>
+          c.name.toLowerCase().includes(lower) ||
+          (c.city  && c.city.toLowerCase().includes(lower)) ||
+          (c.patron && c.patron.toLowerCase().includes(lower)) ||
+          (c.address && c.address.toLowerCase().includes(lower))
+        )
+        .slice(0, 8);
+    }
+
+    function highlightMatch(text, q) {
+      if (!q) return text;
+      const idx = text.toLowerCase().indexOf(q.toLowerCase());
+      if (idx === -1) return text;
+      return text.slice(0, idx)
+        + '<mark>' + text.slice(idx, idx + q.length) + '</mark>'
+        + text.slice(idx + q.length);
+    }
+
+    function renderAutocomplete(suggestions, q) {
+      const list = document.getElementById('autocompleteList');
+      if (!suggestions.length) { list.classList.remove('open'); return; }
+      list.innerHTML = suggestions.map((c, i) => `
+        <div class="autocomplete-item" data-idx="${i}"
+             onmousedown="selectSuggestion('${c.id}')">
+          <div class="autocomplete-item-name">${highlightMatch(c.name, q)}</div>
+          <div class="autocomplete-item-sub">${c.city || ''}, NC${c.jurisdiction ? ' · ' + c.jurisdiction : ''}</div>
+        </div>
+      `).join('');
+      acHighlight = -1;
+      list.classList.add('open');
+    }
+
+    function showAutocomplete() {
+      const q = document.getElementById('searchInput').value.trim();
+      if (q.length >= 1) renderAutocomplete(getSuggestions(q), q);
+    }
+
+    function hideAutocomplete() {
+      // Delay so mousedown fires first
+      setTimeout(() => {
+        document.getElementById('autocompleteList').classList.remove('open');
+        acHighlight = -1;
+      }, 180);
+    }
+
+    function onSearchInput() {
+      const input = document.getElementById('searchInput');
+      const q = input.value;
+      // Show/hide clear button
+      document.getElementById('searchClear').classList.toggle('visible', q.length > 0);
+      // Autocomplete
+      const suggestions = getSuggestions(q.trim());
+      renderAutocomplete(suggestions, q.trim());
+      // Live filter
+      visibleCount = PAGE_SIZE;
       applyFilters();
     }
+
+    function onSearchKeydown(e) {
+      const list = document.getElementById('autocompleteList');
+      const items = list.querySelectorAll('.autocomplete-item');
+      if (!items.length) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        acHighlight = Math.min(acHighlight + 1, items.length - 1);
+        items.forEach((el, i) => el.classList.toggle('highlighted', i === acHighlight));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        acHighlight = Math.max(acHighlight - 1, 0);
+        items.forEach((el, i) => el.classList.toggle('highlighted', i === acHighlight));
+      } else if (e.key === 'Enter') {
+        if (acHighlight >= 0 && items[acHighlight]) {
+          items[acHighlight].dispatchEvent(new MouseEvent('mousedown'));
+        }
+        list.classList.remove('open');
+      } else if (e.key === 'Escape') {
+        list.classList.remove('open');
+      }
+    }
+
+    function selectSuggestion(id) {
+      const c = churches.find(ch => ch.id === id);
+      if (!c) return;
+      document.getElementById('searchInput').value = c.name;
+      document.getElementById('searchClear').classList.add('visible');
+      document.getElementById('autocompleteList').classList.remove('open');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+      // Scroll to grid
+      setTimeout(() => {
+        document.getElementById('church-grid-section').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      document.getElementById('searchClear').classList.remove('visible');
+      document.getElementById('autocompleteList').classList.remove('open');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+      input.focus();
+    }
+
     /* ─────────────────────────────────────────────────
        FILTER LOGIC
     ───────────────────────────────────────────────── */
@@ -887,40 +1160,62 @@
       activeFilter = city;
       document.querySelectorAll('#filterPills .pill').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
+      visibleCount = PAGE_SIZE;
       applyFilters();
     }
 
-    function filterChurches() { applyFilters(); }
+    function filterChurches() { visibleCount = PAGE_SIZE; applyFilters(); }
 
     function setJurisdictionFilter(j, btn) {
       activeJurisdiction = j;
       document.querySelectorAll('#jurisAllBtn, #jurisdictionFilters .pill')
         .forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
+      visibleCount = PAGE_SIZE;
       applyFilters();
     }
 
-  function applyFilters() {
-    const q = document.getElementById('searchInput').value.toLowerCase().trim();
-    filtered = churches.filter(c => {
-      const cityMatch     = activeFilter === 'all' || c.city === activeFilter;
-      const jurisMatch    = activeJurisdiction === 'all' || c.jurisdiction === activeJurisdiction;
-      const langMatch  = activeLanguage === 'all'
-      ? true
-      : activeLanguage === 'Bilingual'
-        ? c.languages && c.languages.length > 1
-        : c.languages && c.languages.length === 1 && c.languages.some(l => l.toLowerCase() === activeLanguage.toLowerCase());
+    function setLanguageFilter(lang, btn) {
+      activeLanguage = lang;
+      document.querySelectorAll('#languageFilters .pill')
+        .forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+    }
 
-      const textMatch     = !q ||
-        c.name.toLowerCase().includes(q) ||
-        c.city.toLowerCase().includes(q) ||
-        (c.patron && c.patron.toLowerCase().includes(q));
-      return cityMatch && jurisMatch && langMatch && textMatch;
-    });
-    renderGrid();
-    renderMapSidebar();
-    updateMapMarkers();
-  }
+    function applyFilters() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      filtered = churches.filter(c => {
+        const cityMatch  = activeFilter === 'all' || c.city === activeFilter;
+        const jurisMatch = activeJurisdiction === 'all' || c.jurisdiction === activeJurisdiction;
+        const langMatch  = activeLanguage === 'all'
+          ? true
+          : activeLanguage === 'Bilingual'
+            ? c.languages && c.languages.length > 1
+            : c.languages && c.languages.length === 1
+              && c.languages.some(l => l.toLowerCase() === activeLanguage.toLowerCase());
+        const textMatch  = !q ||
+          (c.name    && c.name.toLowerCase().includes(q)) ||
+          (c.city    && c.city.toLowerCase().includes(q)) ||
+          (c.patron  && c.patron.toLowerCase().includes(q)) ||
+          (c.address && c.address.toLowerCase().includes(q)) ||
+          (c.jurisdiction && c.jurisdiction.toLowerCase().includes(q)) ||
+          (c.priest  && c.priest.toLowerCase().includes(q));
+        return cityMatch && jurisMatch && langMatch && textMatch;
+      });
+      renderGrid();
+      renderMapSidebar();
+      updateMapMarkers();
+    }
+
+    /* ─────────────────────────────────────────────────
+       SEE MORE / PAGINATION
+    ───────────────────────────────────────────────── */
+    function loadMore() {
+      visibleCount += PAGE_SIZE;
+      renderGrid(true);
+    }
 
     /* ─────────────────────────────────────────────────
        RENDER — JURISDICTION FILTER PILLS
@@ -935,21 +1230,34 @@
     }
 
     /* ─────────────────────────────────────────────────
-       RENDER — CHURCH GRID
+       RENDER — CHURCH GRID  (with pagination)
     ───────────────────────────────────────────────── */
-    function renderGrid() {
+    function renderGrid(append = false) {
       const grid = document.getElementById('churchGrid');
+      const total = filtered.length;
+      const showing = Math.min(visibleCount, total);
 
-      if (!filtered.length) {
+      // Results count
+      const countEl = document.getElementById('resultsCount');
+      if (total === 0) {
+        countEl.textContent = '';
+      } else {
+        countEl.textContent = `Showing ${showing} of ${total} parish${total !== 1 ? 'es' : ''}`;
+      }
+
+      if (total === 0) {
         grid.innerHTML = `
           <p style="grid-column:1/-1; text-align:center;
              font-family:'Josefin Sans',sans-serif; color:var(--text-mid); padding:3rem 0;">
             No parishes found matching your search.
           </p>`;
+        document.getElementById('seeMoreWrap').style.display = 'none';
         return;
       }
 
-      grid.innerHTML = filtered.map(c => {
+      const slice = filtered.slice(0, showing);
+
+      grid.innerHTML = slice.map(c => {
         const priests = getPriestInfo(c.id);
 
         const priestHTML = priests.length
@@ -965,11 +1273,6 @@
                  </div>`
               : '');
 
-        const languagesHTML = c.languages 
-          ? `<div style="font-size:0.75rem; color:var(--text-mid);">
-               languagesHTML: ${c.languages.join(', ')}
-             </div>`
-          : '';
         const primaryPriest = priests.find(p => p.rank === 'Proistamenos') || priests[0];
         const emailAddr = (primaryPriest && primaryPriest.email) || c.priestEmail || '';
         const emailBtn = emailAddr
@@ -977,15 +1280,15 @@
                 style="text-decoration:none;">✉ Email Priest</a>`
           : '';
 
+        const chipCls = chipClass(c.jurisdiction);
+
         return `
           <article class="church-full-card" data-id="${c.id}" data-jurisdiction="${c.jurisdiction || ''}">
             <div class="card-top-bar"></div>
             ${c.hasCalendar ? '<span class="has-calendar">☩ Calendar</span>' : ''}
             <div class="card-body">
               ${c.jurisdiction
-                ? `<div style="font-family:'Cinzel',sans-serif; font-size:0.62rem;
-                    letter-spacing:0.15em; text-transform:uppercase;
-                    color:var(--text-mid); margin-bottom:0.75rem;">${c.jurisdiction}</div>`
+                ? `<div class="jurisdiction-chip ${chipCls}">${c.jurisdiction}</div>`
                 : ''}
               <div class="card-patron">${c.name}</div>
 
@@ -1000,7 +1303,7 @@
 
               <div class="card-schedule-label">Regular Services</div>
               <ul class="schedule-items">
-                ${c.services.map(s => `<li>${s}</li>`).join('')}
+                ${(c.services || []).map(s => `<li>${s}</li>`).join('')}
               </ul>
 
               ${priestHTML}
@@ -1021,68 +1324,40 @@
                   Map ⊕
                 </button>
               </div>
-
             </div>
           </article>
         `;
       }).join('');
-    }
-    /* ─────────────────────────────────────────────────
-       Get Reviews
-    ───────────────────────────────────────────────── */
-  async function loadReviewOverview(id) {
-    const section = document.getElementById('reviewSection');
-    section.innerHTML = `<p style="font-style:italic;color:var(--text-mid);font-size:0.9rem;">Generating overview…</p>`;
-    try {
-      const res = await fetch(`/api/reviews/${id}/overview`);
-      const { overview } = await res.json();
-      section.innerHTML = `
-        <div style="border-left:3px solid var(--gold);padding:1rem 1.2rem;
-                    background:rgba(201,162,39,0.06);margin-top:0.5rem;">
-          <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;
-                      text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">
-            ✦ AI Overview
-          </div>
-          <p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${overview}</p>
-        </div>`;
-    } catch {
-      section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Could not load overview.</p>`;
-    }
-  }
 
-  async function loadReviews(id) {
-    const section = document.getElementById('reviewSection');
-    section.innerHTML = `<p style="font-style:italic;color:var(--text-mid);font-size:0.9rem;">Loading reviews…</p>`;
-    try {
-      const res = await fetch(`/api/reviews/${id}`);
-      const reviews = await res.json();
-      if (!reviews.length) {
-        section.innerHTML = `<p style="font-family:'Josefin Sans',sans-serif;font-size:0.85rem;color:var(--text-mid);font-style:italic;">No reviews yet. <a href="reviews.html" style="color:var(--gold);">Be the first ↗</a></p>`;
-        return;
+      // See More
+      const seeMoreWrap = document.getElementById('seeMoreWrap');
+      const seeMoreBtn  = document.getElementById('seeMoreBtn');
+      const counter     = document.getElementById('seeMoreCounter');
+
+      if (showing < total) {
+        seeMoreWrap.style.display = 'block';
+        const remaining = total - showing;
+        counter.textContent = `${showing} of ${total} shown`;
+        seeMoreBtn.disabled = false;
+        seeMoreBtn.innerHTML = `☩ Show ${Math.min(PAGE_SIZE, remaining)} More Parishes
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>`;
+      } else if (total > PAGE_SIZE) {
+        // All loaded, show collapse
+        seeMoreWrap.style.display = 'block';
+        counter.textContent = `All ${total} parishes shown`;
+        seeMoreBtn.innerHTML = `☩ Show Less ↑`;
+        seeMoreBtn.onclick = () => {
+          visibleCount = PAGE_SIZE;
+          seeMoreBtn.onclick = loadMore;
+          renderGrid();
+          document.getElementById('church-grid-section').scrollIntoView({ behavior: 'smooth' });
+        };
+      } else {
+        seeMoreWrap.style.display = 'none';
       }
-      section.innerHTML = `
-        <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;
-                    text-transform:uppercase;color:var(--text-mid);margin-bottom:0.75rem;">
-          ✎ Reviews
-        </div>
-        ${reviews.map(r => `
-          <div style="padding:0.9rem;border:1px solid rgba(201,162,39,0.18);
-                      border-left:3px solid var(--gold);margin-bottom:0.75rem;
-                      background:rgba(201,162,39,0.04);">
-            <div style="font-family:'Josefin Sans',sans-serif;font-size:0.72rem;
-                        letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
-                        margin-bottom:0.2rem;">☩ ${r.author}</div>
-            <div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${r.text}</div>
-          </div>
-        `).join('')}
-        <a href="reviews.html" style="font-family:'Cinzel',serif;font-size:0.72rem;
-          letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;">
-          ✎ Write a Review ↗
-        </a>`;
-    } catch {
-      section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Could not load reviews.</p>`;
     }
-  }
 
     /* ─────────────────────────────────────────────────
        RENDER — MAP SIDEBAR
@@ -1209,9 +1484,7 @@
         try {
           const res = await fetch(`/api/schedule/${c.id}`);
           if (res.ok) events = await res.json();
-        } catch (e) {
-          // fall through to static schedule
-        }
+        } catch (e) { /* fall through */ }
       }
 
       const priests = getPriestInfo(c.id);
@@ -1228,7 +1501,6 @@
             </div>
           </div>
         `).join('');
-
         priestBlockHTML = `
           <div class="modal-section-head">Clergy</div>
           <div class="modal-priest-block">${priestRows}</div>
@@ -1240,7 +1512,7 @@
             <div class="modal-priest-entry">
               <div class="modal-priest-entry-name">☩ ${c.priest}</div>
               <div class="modal-priest-entry-contact">
-                ${c.phone      ? `<a href="tel:${c.phone}">📞 ${c.phone}</a>` : ''}
+                ${c.phone       ? `<a href="tel:${c.phone}">📞 ${c.phone}</a>` : ''}
                 ${c.priestEmail ? `<a href="mailto:${c.priestEmail}">✉ ${c.priestEmail}</a>` : ''}
               </div>
             </div>
@@ -1278,7 +1550,7 @@
         eventsHTML = `
           <div class="modal-section-head">Regular Service Schedule</div>
           <ul class="schedule-items" style="margin-bottom:1.5rem;">
-            ${c.services.map(s => `<li>${s}</li>`).join('')}
+            ${(c.services || []).map(s => `<li>${s}</li>`).join('')}
           </ul>
           <p style="font-size:0.85rem;color:var(--text-mid);font-style:italic;">
             ${c.hasCalendar
@@ -1329,6 +1601,63 @@
     });
 
     /* ─────────────────────────────────────────────────
+       REVIEWS
+    ───────────────────────────────────────────────── */
+    async function loadReviewOverview(id) {
+      const section = document.getElementById('reviewSection');
+      section.innerHTML = `<p style="font-style:italic;color:var(--text-mid);font-size:0.9rem;">Generating overview…</p>`;
+      try {
+        const res = await fetch(`/api/reviews/${id}/overview`);
+        const { overview } = await res.json();
+        section.innerHTML = `
+          <div style="border-left:3px solid var(--gold);padding:1rem 1.2rem;
+                      background:rgba(201,162,39,0.06);margin-top:0.5rem;">
+            <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;
+                        text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">
+              ✦ AI Overview
+            </div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${overview}</p>
+          </div>`;
+      } catch {
+        section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Could not load overview.</p>`;
+      }
+    }
+
+    async function loadReviews(id) {
+      const section = document.getElementById('reviewSection');
+      section.innerHTML = `<p style="font-style:italic;color:var(--text-mid);font-size:0.9rem;">Loading reviews…</p>`;
+      try {
+        const res = await fetch(`/api/reviews/${id}`);
+        const reviews = await res.json();
+        if (!reviews.length) {
+          section.innerHTML = `<p style="font-family:'Josefin Sans',sans-serif;font-size:0.85rem;color:var(--text-mid);font-style:italic;">No reviews yet. <a href="reviews.html" style="color:var(--gold);">Be the first ↗</a></p>`;
+          return;
+        }
+        section.innerHTML = `
+          <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;
+                      text-transform:uppercase;color:var(--text-mid);margin-bottom:0.75rem;">
+            ✎ Reviews
+          </div>
+          ${reviews.map(r => `
+            <div style="padding:0.9rem;border:1px solid rgba(201,162,39,0.18);
+                        border-left:3px solid var(--gold);margin-bottom:0.75rem;
+                        background:rgba(201,162,39,0.04);">
+              <div style="font-family:'Josefin Sans',sans-serif;font-size:0.72rem;
+                          letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
+                          margin-bottom:0.2rem;">☩ ${r.author}</div>
+              <div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${r.text}</div>
+            </div>
+          `).join('')}
+          <a href="reviews.html" style="font-family:'Cinzel',serif;font-size:0.72rem;
+            letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;">
+            ✎ Write a Review ↗
+          </a>`;
+      } catch {
+        section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Could not load reviews.</p>`;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────
        TOAST
     ───────────────────────────────────────────────── */
     function showToast(msg, duration = 3500) {
@@ -1356,10 +1685,7 @@
       try {
         const res = await fetch('/api/config');
         const { mapsApiKey } = await res.json();
-        if (!mapsApiKey) {
-          console.error('No Maps API key returned from /api/config');
-          return;
-        }
+        if (!mapsApiKey) return;
         const s = document.createElement('script');
         s.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&callback=initMap`;
         s.async = true;
@@ -1369,8 +1695,6 @@
         console.error('Failed to load Maps API:', e);
       }
     }
-
-
   </script>
 </body>
 </html>
