@@ -831,7 +831,7 @@
     let activeJurisdiction = 'all';
     let googleMap    = null;
     let markers      = [];
-    let languages = 'all'; 
+    let activeLanguage = 'all'; 
 
     /* ─────────────────────────────────────────────────
        LOAD DATA
@@ -969,9 +969,9 @@
                  </div>`
               : '');
 
-        const languages = c.languages 
+        const languagesHTML = c.languages 
           ? `<div style="font-size:0.75rem; color:var(--text-mid);">
-               Languages: ${c.languages.join(', ')}
+               languagesHTML: ${c.languages.join(', ')}
              </div>`
           : '';
         const primaryPriest = priests.find(p => p.rank === 'Proistamenos') || priests[0];
