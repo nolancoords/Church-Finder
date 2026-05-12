@@ -379,11 +379,10 @@
       --j-bulgarian: #00734a;   /* Bulgarian green */
       --j-romanian:  #002B7F;   /* Romanian blue */
       --j-ukrainian: #005BBB;   /* Ukrainian blue */
+      --j-coptic:    #8B0000;   /* Coptic deep red */
+      --j-ethiopian: #078930;   /* Ethiopian green */
       --j-default:   #1a3a6e;
     }
-
-    /* ── JURISDICTION BADGE Flags ── */
-    
 
     /* ── MAP ── */
     .map-section { background: var(--off-white); padding: 5rem 2rem; }
@@ -465,6 +464,8 @@
     [data-jurisdiction="OCA"] .card-top-bar {
       background: linear-gradient(90deg, #b22234 30%, #ffffff 50%, #3c3b6e 70%);
     }
+    [data-jurisdiction="Antioch"] .card-top-bar,
+    [data-jurisdiction="AOCANA"] .card-top-bar,
     [data-jurisdiction="Antiochian"] .card-top-bar {
       background: linear-gradient(90deg, #d52b1e 25%, #ffffff 50%, #009a44 75%);
     }
@@ -480,6 +481,13 @@
     [data-jurisdiction="Ukrainian"] .card-top-bar {
       background: linear-gradient(90deg, #005BBB 40%, #FFD500 60%);
     }
+    [data-jurisdiction="Coptic"] .card-top-bar {
+      background: linear-gradient(90deg, #ce1126 25%, #ffffff 50%, #000000 75%);
+    }
+    [data-jurisdiction="Ethiopian"] .card-top-bar {
+      background: linear-gradient(90deg, #078930 25%, #FCDD09 50%, #DA121A 75%);
+    }
+
     /* Jurisdiction badge chip on card */
     .jurisdiction-chip {
       display: inline-flex;

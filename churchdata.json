@@ -215,7 +215,61 @@
         "Divine Liturgy: Sun 10:00 AM"
       ], 
       "languages": ["English", "Greek", "Arabic"]
-    }
+    },
+    {
+      "id": "holy-trinity-asheville",
+      "name": "Holy Trinity Orthodox Church",
+      "jurisdiction": "GOARCH",
+      "patron": "The Holy Trinity",
+      "city": "Asheville",
+      "state": "NC",
+      "address": "227 Cumberland Ave, Asheville, NC 28801",
+      "phone": "(828) 253-3754",
+      "website": "https://www.holycrossoca.org/",
+      "contactInfo": {
+        "Fr. Ioannis": {"name": "Fr. Ioannis",
+        "rank": "Proistamenos",
+        "email": "frioannis@htavl.org",
+        "phone": "(828) 253-3574",
+        "appointment": "https://htavl.org/about/clergy-staff"
+      }}, 
+      "lat": 35.81447235378306,
+      "lng": -82.562942653064,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/c_d4121236e10d899dc7a609eddfc6e23c36146ea0128f637dcb969e680e1f7978%40group.calendar.google.com/public/basic.ics",
+      "services": [
+        "Orthros: Sun 8:30 AM", 
+        "Divine Liturgy: Sun 9:30 AM",
+        "Vespers: Sat 5:00 PM"
+      ], 
+      "languages": ["English", "Greek"]
+    },
+    {
+      "id": "saint-nicholas-asheville",
+      "name": "Saint Nicholas Orthodox Church",
+      "jurisdiction": "ROCOR",
+      "patron": "Saint Nicholas",
+      "city": "Asheville",
+      "state": "NC",
+      "address": "5 Park Ridge Dr, Fletcher, NC 28732",
+      "phone": "(828)681-8080",
+      "website": "https://www.stnicholasoc.org/about-our-church/",
+      "contactInfo": {
+        "Fr. Steven": {"name": "Fr. Steven",
+        "rank": "Proistamenos",
+        "email": "fr.steven.rocor@gmail.com",
+        "phone": "(828)681-8080"
+      }}, 
+      "lat": 35.448413354422684,
+      "lng": -82.52716044923474,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/dormitiongso%40gmail.com/public/basic.ics",
+      "services": [
+        "Divine Liturgy: Sun 9:40 AM",
+        "Vigil with Confessions: Sat 6:00 PM"
+      ], 
+      "languages": ["English", "Slavonic"]
+    }    
   ]
 
 
