@@ -20,7 +20,11 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const churches = JSON.parse(fs.readFileSync("./churchdata.json"));
+
+function getChurches() {
+  return JSON.parse(fs.readFileSync("./churchdata.json", "utf-8"));
+}
+
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 app.get('/api/config', (req, res) => {
@@ -35,6 +39,7 @@ app.get("/api/reviews/:id", async (req, res) => {
       .collection("reviews")
       .orderBy("date", "desc")
       .get();
+
     const reviews = snapshot.docs.map(doc => doc.data());
     res.json(reviews);
   } catch (err) {
@@ -44,9 +49,11 @@ app.get("/api/reviews/:id", async (req, res) => {
 
 app.post("/api/reviews/:id", async (req, res) => {
   const { text, author } = req.body;
+
   if (!text || !text.trim()) {
     return res.status(400).json({ error: "Review text required" });
   }
+
   try {
     const ref = await db
       .collection("churches")
@@ -57,6 +64,7 @@ app.post("/api/reviews/:id", async (req, res) => {
         author: author?.trim() || "Anonymous",
         date: new Date().toISOString()
       });
+
     res.json({ ok: true, id: ref.id });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -65,31 +73,38 @@ app.post("/api/reviews/:id", async (req, res) => {
 
 app.get("/api/reviews/:id/overview", async (req, res) => {
   try {
+    const churches = getChurches(); // ✅ FIX HERE
     const church = churches.find(c => c.id === req.params.id);
+
     const snapshot = await db
       .collection("churches")
       .doc(req.params.id)
       .collection("reviews")
       .orderBy("date", "desc")
       .get();
+
     const churchReviews = snapshot.docs.map(doc => doc.data());
+
     if (!churchReviews.length) {
       return res.json({ overview: "No reviews yet for this parish." });
     }
+
     const reviewText = churchReviews
       .map((r, i) => `Review ${i + 1} (${r.author}): "${r.text}"`)
       .join("\n");
+
     const message = await anthropic.messages.create({
       model: "claude-opus-4-5",
       max_tokens: 300,
       messages: [{
         role: "user",
-        content: `Here are visitor reviews for ${church?.name || "this Orthodox church"}. 
+        content: `Here are visitor reviews for ${church?.name || "this Orthodox church"}.
 Write a warm, 2-3 sentence summary of what people are saying. Be balanced and honest.
 
 ${reviewText}`
       }]
     });
+
     res.json({ overview: message.content[0].text });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -97,17 +112,28 @@ ${reviewText}`
 });
 
 app.get("/api/schedule/:id", async (req, res) => {
+  const churches = getChurches(); // ✅ FIX HERE
   const church = churches.find(c => c.id === req.params.id);
+
   if (!church) return res.status(404).json({ error: "Church not found" });
   if (!church.ics) return res.status(404).json({ error: "No ICS feed" });
+
   try {
     const data = await ical.async.fromURL(church.ics);
+
     const now = new Date();
+
     const events = Object.values(data)
       .filter(ev => ev.type === "VEVENT" && new Date(ev.start) >= now)
-      .map(ev => ({ summary: ev.summary, start: ev.start, end: ev.end, location: ev.location }))
+      .map(ev => ({
+        summary: ev.summary,
+        start: ev.start,
+        end: ev.end,
+        location: ev.location
+      }))
       .sort((a, b) => new Date(a.start) - new Date(b.start))
       .slice(0, 20);
+
     res.json(events);
   } catch (err) {
     res.status(500).json({ error: "Failed to load calendar" });
