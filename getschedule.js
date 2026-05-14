@@ -25,8 +25,12 @@ admin.initializeApp({
 
 const db             = admin.firestore();
 
+let churchCache = null;
 function getChurches() {
-  return JSON.parse(fs.readFileSync("./churchdata.json", "utf-8"));
+  if (!churchCache) {
+    churchCache = JSON.parse(fs.readFileSync("./churchdata.json", "utf-8"));
+  }
+  return churchCache;
 }
 
 app.get('/api/config', (req, res) => {
@@ -74,6 +78,10 @@ app.post("/api/reviews/:id", async (req, res) => {
 });
 
 app.get("/api/reviews/:id/overview", async (req, res) => {
+  const cacheKey    = `overview_${req.params.id}`;
+  const cached      = myCache.get(cacheKey);
+  if (cached) return res.json({ overview: cached });
+
   try {
     const churches  = getChurches(); 
     const church    = churches.find(c => c.id === req.params.id);
@@ -102,15 +110,17 @@ app.get("/api/reviews/:id/overview", async (req, res) => {
         role: "user",
         content: `Here are visitor reviews for ${church?.name || "this Orthodox church"}.
 Write a warm, 2-3 sentence summary of what people are saying. Be balanced and honest.
-
 ${reviewText}`
       }]
+
+
     });
 
     res.json({ overview: message.content[0].text });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+
 });
 
 
