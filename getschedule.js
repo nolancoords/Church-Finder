@@ -10,7 +10,7 @@ import NodeCache from 'node-cache';
 
 
 
-const myCache        = new NodeCache({ stdTTL: 600});
+const myCache        = new NodeCache({ stdTTL: 3600});
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const app            = express();
 const __filename     = fileURLToPath(import.meta.url);
@@ -161,3 +161,18 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+setInterval(async () => {
+  const churches = getChurches();
+  for (const church of churches) {
+    if (church.ics) {
+      try {
+        const data = await ical.async.fromURL(church.ics);
+        // ... transform and sort data ...
+        myCache.set(`schedule_${church.id}`, events);
+      } catch (e) {
+        console.error(`Failed background sync for ${church.id}`);
+      }
+    }
+  }
+}, 15 * 60 * 1000);
