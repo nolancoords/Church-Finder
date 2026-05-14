@@ -6,26 +6,26 @@ import { fileURLToPath } from "url";
 import ical from "node-ical";
 import Anthropic from "@anthropic-ai/sdk";
 import fs from "fs";
+import NodeCache from 'node-cache';
 
+
+
+const myCache        = new NodeCache({ stdTTL: 600});
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+const db             = admin.firestore();
+const app            = express();
+const __filename     = fileURLToPath(import.meta.url);
+const __dirname      = path.dirname(__filename);
+const anthropic      = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+app.use(express.json());
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const db = admin.firestore();
-const app = express();
-app.use(express.json());
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-
 function getChurches() {
   return JSON.parse(fs.readFileSync("./churchdata.json", "utf-8"));
 }
-
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 app.get('/api/config', (req, res) => {
   res.json({ mapsApiKey: process.env.MAPS_API_KEY });
@@ -73,8 +73,8 @@ app.post("/api/reviews/:id", async (req, res) => {
 
 app.get("/api/reviews/:id/overview", async (req, res) => {
   try {
-    const churches = getChurches(); // ✅ FIX HERE
-    const church = churches.find(c => c.id === req.params.id);
+    const churches  = getChurches(); 
+    const church    = churches.find(c => c.id === req.params.id);
 
     const snapshot = await db
       .collection("churches")
@@ -111,19 +111,21 @@ ${reviewText}`
   }
 });
 
+
 app.get("/api/schedule/:id", async (req, res) => {
-  const churches = getChurches(); // ✅ FIX HERE
+  const churches = getChurches(); 
   const church = churches.find(c => c.id === req.params.id);
 
   if (!church) return res.status(404).json({ error: "Church not found" });
   if (!church.ics) return res.status(404).json({ error: "No ICS feed" });
 
-  try {
-    const data = await ical.async.fromURL(church.ics);
-
-    const now = new Date();
-
-    const events = Object.values(data)
+  const cacheKey  = `schedule_${req.params.id}`;
+  const cache     = myCache.get(cacheKey)
+  if (cache) return res.json(cache);
+    try {
+    const data    = await ical.async.fromURL(church.ics);
+    const now     = new Date();
+    const events  = Object.values(data)
       .filter(ev => ev.type === "VEVENT" && new Date(ev.start) >= now)
       .map(ev => ({
         summary: ev.summary,
@@ -133,6 +135,7 @@ app.get("/api/schedule/:id", async (req, res) => {
       }))
       .sort((a, b) => new Date(a.start) - new Date(b.start))
       .slice(0, 20);
+    myCache.set(cacheKey, events);
 
     res.json(events);
   } catch (err) {
