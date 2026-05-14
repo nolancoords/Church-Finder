@@ -78,13 +78,13 @@ app.post("/api/reviews/:id", async (req, res) => {
 });
 
 app.get("/api/reviews/:id/overview", async (req, res) => {
-  const cacheKey    = `overview_${req.params.id}`;
-  const cached      = myCache.get(cacheKey);
+  const cacheKey  = `overview_${req.params.id}`;
+  const cached    = myCache.get(cacheKey);
   if (cached) return res.json({ overview: cached });
 
   try {
-    const churches  = getChurches(); 
-    const church    = churches.find(c => c.id === req.params.id);
+    const churches = getChurches();
+    const church   = churches.find(c => c.id === req.params.id);
 
     const snapshot = await db
       .collection("churches")
@@ -112,15 +112,15 @@ app.get("/api/reviews/:id/overview", async (req, res) => {
 Write a warm, 2-3 sentence summary of what people are saying. Be balanced and honest.
 ${reviewText}`
       }]
-
-
     });
 
-    res.json({ overview: message.content[0].text });
+    const overview    = message.content[0].text;
+    myCache.set(cacheKey, overview);       // ← cache before responding
+    res.json({ overview });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-
 });
 
 
