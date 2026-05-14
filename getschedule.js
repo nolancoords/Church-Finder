@@ -12,16 +12,18 @@ import NodeCache from 'node-cache';
 
 const myCache        = new NodeCache({ stdTTL: 600});
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-const db             = admin.firestore();
 const app            = express();
 const __filename     = fileURLToPath(import.meta.url);
 const __dirname      = path.dirname(__filename);
 const anthropic      = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-app.use(express.json());
 
+
+app.use(express.json());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+const db             = admin.firestore();
 
 function getChurches() {
   return JSON.parse(fs.readFileSync("./churchdata.json", "utf-8"));
