@@ -30,7 +30,32 @@
       ],
       "languages": ["English", "Greek"]
     },
-        {
+    {
+      "id": "protection-charlotte",
+      "jurisdiction": "ROCOR",
+      "name": "Russian Orthodox Church of the Reigning Mother of God",
+      "patron": "Reigning Mother of God",
+      "city": "Charlotte",
+      "state": "NC",
+      "address": "5310 Statesville Rd, Charlotte, NC 28269",
+      "phone": "(251)406-1814",
+      "website": "https://reigningmotherofgod.org/",
+      "lat": 35.292110949715095,
+      "lng": -80.83730354232857,
+      "contactInfo": {
+        "Fr. Alexander": {"name": "Fr. Apexander",
+        "rank": "Proistamenos",
+        "phone": "(251)406-1814" }}, 
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/rmogsitemgmt%40gmail.com/public/basic.ics",
+      "services": [
+        "Sunday Hours:  8:45 AM",
+        "Divine Liturgy: 9:45 AM",
+        "Vespers: Sat  5:00 PM"
+      ],
+      "languages": ["Slavonic", "Russian"]
+    },
+    {
       "id": "annunciation-winston",
       "name": "Annunciation Greek Orthodox Church",
       "jurisdiction": "GOARCH",
@@ -268,11 +293,59 @@
         "Vigil with Confessions: Sat 6:00 PM"
       ], 
       "languages": ["English"]
+    },
+    {
+      "id": "saint-basil-wilmington",
+      "name": "Saint Basil Orthodox Church",
+      "jurisdiction": "ROCOR",
+      "patron": "Saint Basil",
+      "city": "Wilmington",
+      "state": "NC",
+      "address": "4601 Blue Clay Rd, Castle Hayne, NC 28429",
+      "phone": "(828) 681-8080",
+      "website": "https://www.wilmingtonoca.org//",
+      "contactInfo": {
+        "Fr. Andrew": {"name": "Fr. Andrew",
+        "rank": "Proistamenos",
+        "email": "fatherandrew@wilmingtonoca.org"
+      }}, 
+      "lat": 34.32627593793815,
+      "lng": -77.88256960979282,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/c_d4121236e10d899dc7a609eddfc6e23c36146ea0128f637dcb969e680e1f7978%40group.calendar.google.com/public/basic.icsbasic.ics",
+      "services": [
+        "Divine Liturgy: Sun 9:30 AM", 
+        "Vespers: Sat 5:00 PM",
+        "Confessions (first come first serve): 5:45 PM",
+        "Vespers: Wed 6:00 PM"
+      ], 
+      "languages": ["English"]
+    },
+    {
+      "id": "saint-nicholas-feyettenam",
+      "name": "St Nicholas Eastern Orthodox Church",
+      "jurisdiction": "OCA",
+      "patron": "Saint Nicholas",
+      "city": "Fayetteville",
+      "state": "NC",
+      "address": "735 Southern Ave, Fayetteville, NC 28306",
+      "phone": "(910)484-7771",
+      "website": "http://www.stnicholasnc.com/", 
+      "contactInfo": {
+        "Fr. Andrew": {"name": "Fr. Hieromonk Andrew",
+        "rank": "Proistamenos",
+        "email": "koljoshua@aol.com",
+        "phone": "(336)354-2893"
+      }}, 
+      "lat": 35.03959529977907,
+      "lng": -78.88573955767143,
+      "hasCalendar": true,
+      "ics": "https://calendar.google.com/calendar/ical/c_d4121236e10d899dc7a609eddfc6e23c36146ea0128f637dcb969e680e1f7978%40group.calendar.google.com/public/basic.icsbasic.ics",
+      "services": [
+        "Divine Liturgy: Sun 9:40 AM", 
+        "Vespers: Sat 5:00 PM"
+      ], 
+      "languages": ["English"]
     }
   ]
-
-
-
-
-
      
