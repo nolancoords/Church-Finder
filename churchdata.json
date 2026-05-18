@@ -346,6 +346,228 @@
         "Vespers: Sat 5:00 PM"
       ], 
       "languages": ["English"]
-    }
+    },
+    {
+    "id": "holy-trinity-raleigh",
+    "jurisdiction": "GOARCH",
+    "name": "Holy Trinity Greek Orthodox Church",
+    "patron": "Holy Trinity",
+    "city": "Raleigh",
+    "state": "NC",
+    "address": "5000 Lead Mine Rd, Raleigh, NC 27612",
+    "phone": "(919) 781-4548",
+    "website": "http://www.holytrinityraleigh.org/",
+    "contactInfo": {
+        "Father Paul Christy": {"name": "Father Paul Christy", 
+        "rank": "Proistamenos",
+        "email": "htraleighfr@gmail.com",
+        "phone": "(919) 781-4548"
+          }},
+    "hasCalendar": false,
+    "services": [
+      "Orthros: Sun 8:30 AM",
+      "Divine Liturgy: 10:00 AM"
+    ],
+    "languages": ["English", "Greek"]
+  },
+  {
+    "id": "st-barbara-durham",
+    "jurisdiction": "GOARCH",
+    "name": "St. Barbara Greek Orthodox Church",
+    "patron": "Saint Barbara",
+    "city": "Durham",
+    "state": "NC",
+    "address": "8306 NC-751, Durham, NC 27713",
+    "phone": "(919) 484-1600",
+    "website": "https://stbarbarachurchdurhamnc.com/",
+    "contactInfo": {},
+    "services": [
+],
+    "languages": ["English"]
+  },
+  {
+    "id": "holy-transfiguration-raleigh",
+    "jurisdiction": "OCA",
+    "name": "Holy Transfiguration Orthodox Church",
+    "patron": "Transfiguration of Our Lord",
+    "city": "Raleigh",
+    "state": "NC",
+    "address": "5408 Tryon Rd, Raleigh, NC 27606",
+    "phone": "(919) 475-2128",
+    "website": "https://www.holytransfiguration-oca.org/",
+    "contactInfo": {},
+    "hasCalendar": true,
+    "ics": "https://calendar.google.com/calendar/ical/htocassistant%40gmail.com/public/basic.ics",
+    "services": ["Vespers: Wed 6:30 PM",
+                "Vespers: Sat 5:30 PM",
+                "Divine Liturgy: Sun 10:00 AM"],
+    "languages": ["English"]
+  },
+  {
+    "id": "nativity-holy-virgin-charlotte",
+    "jurisdiction": "OCA",
+    "name": "Nativity of the Holy Virgin Orthodox Church",
+    "patron": "Nativity of the Holy Theotokos",
+    "city": "Charlotte",
+    "state": "NC",
+    "address": "1700 Mineral Springs Rd, Charlotte, NC 28262",
+    "phone": "(704) 596-8252",
+    "website": "http://www.holyvirgin.net/",
+    "contactInfo": {
+      "Fr. William C. Mills": {
+        "name": "Fr. William", 
+        "rank": "Proistamenos",
+        "email": "office@holyvirgin.net",
+        "phone": "(704)807-0800"
+      
+  }},
+    "hasCalendar": false,
+    "services": ["Great Vespers: Sat 5:00 PM", 
+                  "Devine Liturgy: Sun 9:00 AM"],
+    "languages": ["English"]
+  },
+  {
+    "id": "st-luke-mooresville",
+    "jurisdiction": "GOARCH",
+    "name": "St. Luke Greek Orthodox Church",
+    "patron": "Saint Luke the Evangelist",
+    "city": "Mooresville",
+    "state": "NC",
+    "address": "134 Talbert Pointe Dr, Mooresville, NC 28117",
+    "phone": "(704) 660-6915",
+    "website": "http://www.stluke-nc.org/",
+    "contactInfo": {
+      "Fr. Robert": {
+        "name": "Fr. Robert",
+        "phone": "(980)829-7826",
+        "email": "fr.robert.lawrence@gmail.com"
+      }
+    },
+    "services": ["Orthros: Sun 8:30 AM", 
+                "Devine Liturgy: Sun 9:30 AM",
+                "Paraklisis: Wed 6:00 PM"],
+    "hasCalendar": true, 
+    "ics": "https://calendar.google.com/calendar/ical/office%40stluke-nc.org/public/basic.ics",
+    "languages": ["English", "Greek", "Slavonic", "Spanish", "Arabic"]
+  },
+  {
+    "id": "archangel-gabriel-hickory",
+    "jurisdiction": "OCA",
+    "name": "Archangel Gabriel Orthodox Church",
+    "patron": "Archangel Gabriel",
+    "city": "Hickory",
+    "state": "NC",
+    "address": "4164 Henry River Rd, Hickory, NC 28602",
+    "phone": "(828) 278-9066",
+    "website": "https://archangelgabrielhickory.org/",
+    "contactInfo": {
+      "Father Paul Schellbach": {
+        "name":"Fr. Paul",
+        "phone": "(828)409-4669",
+        "email": "priest@archangelgabrielhickory.org"
+      }
+    },
+    "services": [
+      "Vespers: Wed 5:00 PM",
+      "Matins: Fri 9:00 AM",
+      "Great Vespers: Sat 4:00 PM",
+      "Catechism: Sat 5:00 PM",
+      "Hours: Sun 9:40 AM",
+      "Divine Liturgy: Sun 10:00 AM"
+    ],
+    "hasCalendar": false,
+    "languages": ["English"]
+  },
+  {
+    "id": "st-george-edenton",
+    "jurisdiction": "OCA",
+    "name": "St. George Orthodox Church",
+    "patron": "Saint George the Great Martyr",
+    "city": "Edenton",
+    "state": "NC",
+    "address": "212 E Church St, Edenton, NC 27932",
+    "phone": "(252) 482-2006",
+    "website": "https://orthodoxedenton.org/",
+    "contactInfo": {
+      "Fr. Andrew": {
+        "name": "Fr. Andrew"
+      }
+    },
+    "services": [
+      "Vespers: Sat  5:00 PM", 
+      "Hours: Sun 9:45 AM",
+      "Divine Liturgy: Sun 10:00 AM"
+    ],
+    "hasCalendar": false,
+    "languages": ["English"]
+  },
+  {
+    "id": "st-john-baptizer-kannapolis",
+    "jurisdiction": "Romanian",
+    "name": "St. John the Baptizer Romanian Orthodox Church",
+    "patron": "Saint John the Baptist",
+    "city": "Charlotte",
+    "state": "NC",
+    "address": "8228 Park Edwards Rd, Kannapolis, NC 28081",
+    "phone": "(929) 343-8332",
+    "website": "http://www.biserica.us/",
+    "contactInfo": {
+      "Fr. Cristian Preda": {
+        "name": "Fr. Cristian",
+        "phone": "(570)535-8212"
+      }
+    },
+    "services": [
+      "Matins: Sun 9:00 AM",
+      "Devine Liturgy: Sun 10:00 AM"
+    ],
+    "languages": ["Romanian"]
+  },
+    {
+    "id": "panagia-prousiotissa-monastery",
+    "jurisdiction": "GOARCH",
+    "name": "Panagia Prousiotissa Greek Orthodox Monastery",
+    "patron": "Virgin Mary",
+    "city": "Troy",
+    "state": "NC",
+    "address": "404 Warner Rd, Troy, NC 27371",
+    "phone": "(910) 572-3331",
+    "website": "https://www.panagiaprousiotissa.org/about",
+    "contactInfo": {
+      "Sisters of Panagia Prousiotissa": {
+        "name": "Sisters of Panagia Prousiotissa",
+        "phone": "(910) 572-3331"
+      }
+    },
+    "services": [
+      "Matins: Sun 7:00 AM",
+      "Devine Liturgy: Sun 9:00 AM"
+    ],
+    "hasCalendar": true, 
+    "ics": "https://calendar.google.com/calendar/ical/prousiotissa.calendar%40gmail.com/public/basic.ics",
+    "languages": ["Greek"]
+  },
+  {
+    "id": "panagia-pammakaristos-monastery",
+    "jurisdiction": "GOARCH",
+    "name": "Holy Monastery of Panagia Pammakaristos",
+    "patron": "Virgin Mary",
+    "city": "Lawsonville",
+    "state": "NC",
+    "address": "1631 Creasey Road, Lawsonville, NC 27022",
+    "phone": "(336) 593-3331",
+    "website": "",
+    "contactInfo": {
+      "Archimandrite Nectarios": {
+        "name": "Archimandrite Nectarios",
+        "phone": "(336) 593-3331"
+      }
+    },
+    "services": [
+      "Please Contact monastery for liturgy schedule"
+    ],
+    "hasCalendar": false,
+    "languages": ["Greek"]
+  }
   ]
      
