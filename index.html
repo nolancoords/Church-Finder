@@ -33,6 +33,60 @@
       overflow-x: hidden;
     }
 
+    /* ── LANGUAGE SWITCHER ── */
+    .lang-switcher {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.4rem 1.5rem;
+      background: rgba(13,30,61,0.95);
+      border-bottom: 1px solid rgba(201,162,39,0.2);
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .lang-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(253,251,245,0.4);
+      margin-right: 0.5rem;
+    }
+    .lang-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border: 1px solid rgba(201,162,39,0.3);
+      background: transparent;
+      color: rgba(253,251,245,0.6);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .lang-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201,162,39,0.08);
+    }
+    .lang-btn.active {
+      background: rgba(201,162,39,0.15);
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .lang-flag { font-size: 0.95rem; line-height: 1; }
+
+    /* offset nav and hero for lang-switcher bar */
+    nav { margin-top: 34px; }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -188,7 +242,7 @@
     /* ── NAV ── */
     nav {
       position: sticky;
-      top: 0;
+      top: 34px;
       z-index: 100;
       background: rgba(13,30,61,0.97);
       backdrop-filter: blur(12px);
@@ -216,6 +270,97 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--gold-light); }
+
+    /* ── SCRIPTURE BANNER ── */
+    .scripture-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f2347 50%, var(--navy) 100%);
+      border-bottom: 1px solid rgba(201,162,39,0.25);
+      padding: 1.6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .scripture-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(201,162,39,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .scripture-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .scripture-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .scripture-label::before,
+    .scripture-label::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .scripture-label::after {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .scripture-text {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1rem, 2.2vw, 1.22rem);
+      font-style: italic;
+      color: rgba(253,251,245,0.92);
+      line-height: 1.75;
+      margin-bottom: 0.6rem;
+      min-height: 2.5em;
+      transition: opacity 0.5s ease;
+    }
+    .scripture-text.loading { opacity: 0.35; }
+    .scripture-ref {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      opacity: 0.8;
+    }
+    .scripture-refresh {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(201,162,39,0.25);
+      color: rgba(201,162,39,0.5);
+      font-size: 0.9rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 2;
+    }
+    .scripture-refresh:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,162,39,0.08);
+    }
+    .scripture-refresh.spinning { animation: spin 0.7s linear; }
+    @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
 
     /* ── SECTION SHELL ── */
     section { padding: 6rem 2rem; }
@@ -281,7 +426,6 @@
       pointer-events: none;
     }
 
-    /* Autocomplete dropdown */
     .autocomplete-list {
       position: absolute;
       top: calc(100% + 4px);
@@ -369,18 +513,17 @@
     }
 
     /* ── JURISDICTION BADGE COLORS ── */
-    /* These map jurisdiction keys to accent colors used in cards & pills */
     :root {
-      --j-goarch:    #0d5eaf;   /* Greek blue */
-      --j-rocor:     #c0392b;   /* Russian red */
-      --j-oca:       #b22234;   /* American red-blue */
-      --j-antioch:   #009a44;   /* Antiochian green */
-      --j-serbian:   #c6363c;   /* Serbian red */
-      --j-bulgarian: #00734a;   /* Bulgarian green */
-      --j-romanian:  #002B7F;   /* Romanian blue */
-      --j-ukrainian: #005BBB;   /* Ukrainian blue */
-      --j-coptic:    #8B0000;   /* Coptic deep red */
-      --j-ethiopian: #078930;   /* Ethiopian green */
+      --j-goarch:    #0d5eaf;
+      --j-rocor:     #c0392b;
+      --j-oca:       #b22234;
+      --j-antioch:   #009a44;
+      --j-serbian:   #c6363c;
+      --j-bulgarian: #00734a;
+      --j-romanian:  #002B7F;
+      --j-ukrainian: #005BBB;
+      --j-coptic:    #8B0000;
+      --j-ethiopian: #078930;
       --j-default:   #1a3a6e;
     }
 
@@ -450,7 +593,6 @@
       transform: translateY(-4px);
     }
 
-    /* ── TOP BAR — jurisdiction color coding ── */
     .card-top-bar {
       height: 7px;
       background: linear-gradient(90deg, var(--j-default), #4a8fd4, var(--j-default));
@@ -488,7 +630,6 @@
       background: linear-gradient(90deg, #078930 25%, #FCDD09 50%, #DA121A 75%);
     }
 
-    /* Jurisdiction badge chip on card */
     .jurisdiction-chip {
       display: inline-flex;
       align-items: center;
@@ -502,7 +643,6 @@
       margin-bottom: 0.75rem;
       color: #fff;
     }
-    /* chip colors per jurisdiction */
     .chip-GOARCH     { background: #0d5eaf; }
     .chip-ROCOR      { background: #c0392b; }
     .chip-OCA        { background: #3c3b6e; }
@@ -804,10 +944,22 @@
       .map-container { grid-template-columns: 1fr; }
       #map { height: 360px; }
       .map-sidebar { max-height: 300px; }
+      .scripture-refresh { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ── LANGUAGE SWITCHER ── -->
+  <div class="lang-switcher">
+    <span class="lang-label">Language</span>
+    <a href="index.html" class="lang-btn active">
+      <span class="lang-flag">🇺🇸</span> English
+    </a>
+    <a href="index_gr.html" class="lang-btn">
+      <span class="lang-flag">🇬🇷</span> Ελληνικά
+    </a>
+  </div>
 
   <!-- ── NAV ── -->
   <nav>
@@ -844,6 +996,17 @@
       </svg>
     </div>
   </section>
+
+  <!-- ── DAILY SCRIPTURE BANNER ── -->
+  <div class="scripture-banner" id="scriptureBanner">
+    <div class="scripture-inner">
+      <div class="scripture-label">✦ Daily Scripture ✦</div>
+      <div class="scripture-text loading" id="scriptureText">Loading today's verse…</div>
+      <div class="scripture-ref" id="scriptureRef"></div>
+    </div>
+    <button class="scripture-refresh" id="scriptureRefreshBtn"
+            onclick="fetchVerse(true)" title="New verse">↻</button>
+  </div>
 
   <!-- ── SEARCH & FILTER ── -->
   <section class="search-section" id="churches">
@@ -977,12 +1140,92 @@
     let googleMap        = null;
     let markers          = [];
 
-    // Pagination
     const PAGE_SIZE      = 9;
     let visibleCount     = PAGE_SIZE;
-
-    // Autocomplete
     let acHighlight      = -1;
+
+    /* ─────────────────────────────────────────────────
+       DAILY SCRIPTURE
+    ───────────────────────────────────────────────── */
+    const VERSE_CACHE_KEY     = 'oc_daily_verse';
+    const VERSE_CACHE_DATE_KEY = 'oc_daily_verse_date';
+
+    function todayString() {
+      return new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+    }
+
+    function formatBookName(raw) {
+      // e.g. "JOHN" -> "John", "FIRST_CORINTHIANS" -> "1 Corinthians"
+      const map = {
+        'FIRST_CORINTHIANS':   '1 Corinthians',
+        'SECOND_CORINTHIANS':  '2 Corinthians',
+        'FIRST_THESSALONIANS': '1 Thessalonians',
+        'SECOND_THESSALONIANS':'2 Thessalonians',
+        'FIRST_TIMOTHY':       '1 Timothy',
+        'SECOND_TIMOTHY':      '2 Timothy',
+        'FIRST_PETER':         '1 Peter',
+        'SECOND_PETER':        '2 Peter',
+        'FIRST_JOHN':          '1 John',
+        'SECOND_JOHN':         '2 John',
+        'THIRD_JOHN':          '3 John',
+        'FIRST_KINGS':         '1 Kings',
+        'SECOND_KINGS':        '2 Kings',
+        'FIRST_SAMUEL':        '1 Samuel',
+        'SECOND_SAMUEL':       '2 Samuel',
+        'FIRST_CHRONICLES':    '1 Chronicles',
+        'SECOND_CHRONICLES':   '2 Chronicles',
+      };
+      if (map[raw]) return map[raw];
+      return raw.charAt(0) + raw.slice(1).toLowerCase().replace(/_/g, ' ');
+    }
+
+    async function fetchVerse(force = false) {
+      const textEl = document.getElementById('scriptureText');
+      const refEl  = document.getElementById('scriptureRef');
+      const btn    = document.getElementById('scriptureRefreshBtn');
+
+      // Check cache (skip cache if forced refresh)
+      if (!force) {
+        const cachedDate = localStorage.getItem(VERSE_CACHE_DATE_KEY);
+        const cachedVerse = localStorage.getItem(VERSE_CACHE_KEY);
+        if (cachedDate === todayString() && cachedVerse) {
+          const v = JSON.parse(cachedVerse);
+          renderVerse(v, textEl, refEl);
+          return;
+        }
+      }
+
+      // Animate refresh button
+      if (btn) { btn.classList.add('spinning'); setTimeout(() => btn.classList.remove('spinning'), 700); }
+
+      textEl.classList.add('loading');
+      textEl.textContent = 'Loading today\'s verse…';
+      refEl.textContent = '';
+
+      try {
+        const res = await fetch('/api/verse');
+        if (!res.ok) throw new Error('Network response not ok');
+        const v = await res.json();
+
+        // Cache it
+        localStorage.setItem(VERSE_CACHE_DATE_KEY, todayString());
+        localStorage.setItem(VERSE_CACHE_KEY, JSON.stringify(v));
+
+        renderVerse(v, textEl, refEl);
+      } catch (err) {
+        textEl.classList.remove('loading');
+        textEl.textContent = '"For I know the plans I have for you, declares the Lord."';
+        refEl.textContent  = '— Jeremiah 29:11';
+        console.warn('Could not fetch verse from /api/verse:', err);
+      }
+    }
+
+    function renderVerse(v, textEl, refEl) {
+      textEl.classList.remove('loading');
+      textEl.textContent = `"${v.text}"`;
+      const bookName = formatBookName(v.book);
+      refEl.textContent  = `— ${bookName} ${v.chapter}:${v.verse}`;
+    }
 
     /* ─────────────────────────────────────────────────
        LOAD DATA
@@ -1027,7 +1270,6 @@
     ───────────────────────────────────────────────── */
     function chipClass(j) {
       if (!j) return 'chip-default';
-      // Normalise common variations
       const map = {
         'goarch': 'chip-GOARCH',
         'rocor':  'chip-ROCOR',
@@ -1088,7 +1330,6 @@
     }
 
     function hideAutocomplete() {
-      // Delay so mousedown fires first
       setTimeout(() => {
         document.getElementById('autocompleteList').classList.remove('open');
         acHighlight = -1;
@@ -1098,12 +1339,9 @@
     function onSearchInput() {
       const input = document.getElementById('searchInput');
       const q = input.value;
-      // Show/hide clear button
       document.getElementById('searchClear').classList.toggle('visible', q.length > 0);
-      // Autocomplete
       const suggestions = getSuggestions(q.trim());
       renderAutocomplete(suggestions, q.trim());
-      // Live filter
       visibleCount = PAGE_SIZE;
       applyFilters();
     }
@@ -1112,7 +1350,6 @@
       const list = document.getElementById('autocompleteList');
       const items = list.querySelectorAll('.autocomplete-item');
       if (!items.length) return;
-
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         acHighlight = Math.min(acHighlight + 1, items.length - 1);
@@ -1139,7 +1376,6 @@
       document.getElementById('autocompleteList').classList.remove('open');
       visibleCount = PAGE_SIZE;
       applyFilters();
-      // Scroll to grid
       setTimeout(() => {
         document.getElementById('church-grid-section').scrollIntoView({ behavior: 'smooth' });
       }, 100);
@@ -1232,14 +1468,13 @@
     }
 
     /* ─────────────────────────────────────────────────
-       RENDER — CHURCH GRID  (with pagination)
+       RENDER — CHURCH GRID
     ───────────────────────────────────────────────── */
     function renderGrid(append = false) {
       const grid = document.getElementById('churchGrid');
       const total = filtered.length;
       const showing = Math.min(visibleCount, total);
 
-      // Results count
       const countEl = document.getElementById('resultsCount');
       if (total === 0) {
         countEl.textContent = '';
@@ -1331,7 +1566,6 @@
         `;
       }).join('');
 
-      // See More
       const seeMoreWrap = document.getElementById('seeMoreWrap');
       const seeMoreBtn  = document.getElementById('seeMoreBtn');
       const counter     = document.getElementById('seeMoreCounter');
@@ -1346,7 +1580,6 @@
             <path d="M12 5v14M5 12l7 7 7-7"/>
           </svg>`;
       } else if (total > PAGE_SIZE) {
-        // All loaded, show collapse
         seeMoreWrap.style.display = 'block';
         counter.textContent = `All ${total} parishes shown`;
         seeMoreBtn.innerHTML = `☩ Show Less ↑`;
@@ -1675,8 +1908,11 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     async function start() {
-      await loadChurches();
-      await loadMapsAPI();
+      await Promise.all([
+        loadChurches(),
+        loadMapsAPI(),
+        fetchVerse()
+      ]);
     }
 
     start();

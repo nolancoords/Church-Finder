@@ -658,7 +658,7 @@
     "contactInfo": {
       "Father Peter": { 
         "name": "Fr. David", 
-        "appointment": "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ01-Ax9nqaspyxLw2l6YP57yHvQb0jIm1SWnYFQCjtcCTs6rnW5qWauipONWWZaLB80Y8icLjZ4?gv=true"
+        "appointment": "https://tinyurl.com/3ctuurkr"
       }
     },
     "lat": 35.7771654844497, 
@@ -738,14 +738,14 @@
         "name": "Fr. Alexander"
       }
     },
-    "lat": 35.06458085987235,
-    "lng":  -78.89945568096014, 
+    "lat": 35.06456329665849, 
+    "lng":  -78.89969171534219, 
     "services": [
       "Orthros: Sun 9:15AM",
       "Devine Liturgy: Sun 10:00 AM"
     ],
     "hasCalendar": false,
-    "languages": ["Romanian"] 
+    "languages": ["Greek", "English"] 
   }
 
 

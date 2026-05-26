@@ -176,3 +176,13 @@ setInterval(async () => {
     }
   }
 }, 15 * 60 * 1000);
+
+
+app.get("/verse", async (req, res) => {
+  const response = await fetch("http://localhost:5000/verse");
+  const data = await response.json();
+
+  res.json(data);
+});
+
+app.listen(3000, () => console.log("JS server running"));

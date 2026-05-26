@@ -857,25 +857,16 @@
     <div class="nav-logo">☩ Ορθόδοξες Εκκλησίες ΒΚ</div>
     <ul class="nav-links">
       <!-- Language Switcher — top left in nav -->
-      <li>
-        <div class="lang-switcher" id="langSwitcher">
-          <button class="lang-btn" onclick="toggleLang(event)" aria-label="Επιλογή γλώσσας">
-            <span class="lang-flag">🇬🇷</span>
-            ΕΛ
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="lang-dropdown">
-            <a class="lang-option" href="index.html">
-              <span class="lang-flag">🇺🇸</span> English
-            </a>
-            <a class="lang-option active" href="index_gr.html">
-              <span class="lang-flag">🇬🇷</span> Ελληνικά
-            </a>
-          </div>
-        </div>
-      </li>
+       <div class="lang-switcher">
+        <span class="lang-label">Language</span>
+        <a href="index.html" class="lang-btn active">
+          <span class="lang-flag">🇺🇸</span> English
+        </a>
+        <a href="index_gr.html" class="lang-btn">
+          <span class="lang-flag">🇬🇷</span> Ελληνικά
+        </a>
+      </div>
+
       <li><a href="#churches">Βρείτε Εκκλησία</a></li>
       <li><a href="#map-section">Χάρτης</a></li>
       <li><a href="#about">Σχετικά</a></li>
