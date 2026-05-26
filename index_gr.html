@@ -218,60 +218,58 @@
     .nav-links a:hover { color: var(--gold-light); }
 
     /* ── LANGUAGE DROPDOWN ── */
-    .lang-switcher {
-      position: relative;
+     .lang-switcher {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
       display: flex;
+      justify-content: flex-end;
+      padding: 0.4rem 1.5rem;
+      background: rgba(13,30,61,0.95);
+      border-bottom: 1px solid rgba(201,162,39,0.2);
+      gap: 0.5rem;
       align-items: center;
+    }
+    .lang-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(253,251,245,0.4);
+      margin-right: 0.5rem;
     }
     .lang-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold-light);
-      background: rgba(201,162,39,0.1);
-      border: 1px solid rgba(201,162,39,0.35);
-      padding: 0.4rem 0.85rem;
+      padding: 0.3rem 0.85rem;
+      border: 1px solid rgba(201,162,39,0.3);
+      background: transparent;
+      color: rgba(253,251,245,0.6);
       cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .lang-btn:hover { background: rgba(201,162,39,0.2); border-color: var(--gold); }
-    .lang-btn svg { transition: transform 0.2s; }
-    .lang-switcher.open .lang-btn svg { transform: rotate(180deg); }
-    .lang-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 0;
-      background: var(--navy);
-      border: 1px solid rgba(201,162,39,0.35);
-      min-width: 160px;
-      z-index: 200;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-    .lang-switcher.open .lang-dropdown { display: block; }
-    .lang-option {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.7rem 1rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: rgba(253,251,245,0.75);
       text-decoration: none;
-      transition: background 0.15s, color 0.15s;
-      border-bottom: 1px solid rgba(201,162,39,0.1);
-      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
     }
-    .lang-option:last-child { border-bottom: none; }
-    .lang-option:hover { background: rgba(201,162,39,0.12); color: var(--gold-light); }
-    .lang-option.active { color: var(--gold-light); background: rgba(201,162,39,0.08); }
-    .lang-flag { font-size: 1rem; line-height: 1; }
+    .lang-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201,162,39,0.08);
+    }
+    .lang-btn.active {
+      background: rgba(201,162,39,0.15);
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .lang-flag { font-size: 0.95rem; line-height: 1; }
+
+    /* offset nav and hero for lang-switcher bar */
+    nav { margin-top: 34px; }
 
     /* ── SECTION SHELL ── */
     section { padding: 6rem 2rem; }
