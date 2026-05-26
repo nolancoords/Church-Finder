@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ορθόδοξες Εκκλησίες Βόρειας Καρολίνας</title>
+  <link rel="icon" href="https://i.etsystatic.com/19318850/r/il/35c539/7360181136/il_570xN.7360181136_ruho.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:        #0d1e3d;
+      --royal:       #1a3a6e;
+      --cobalt:      #1e4fc2;
+      --sky:         #4a8fd4;
+      --gold:        #c9a227;
+      --gold-light:  #e8c84a;
+      --gold-pale:   #f5e8a3;
+      --white:       #fdfbf5;
+      --off-white:   #f0ead8;
+      --text-dark:   #0d1e3d;
+      --text-mid:    #2c4a80;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(26,58,110,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,162,39,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(30,79,194,0.3) 0%, transparent 50%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      animation: heroFadeIn 1.4s ease-out both;
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .cross-ornament {
+      font-size: 3rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+      animation: heroFadeIn 1.4s 0.2s ease-out both;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.15;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+      animation: heroFadeIn 1.4s 0.4s ease-out both;
+    }
+
+    .hero-title span {
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: rgba(253,251,245,0.7);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      animation: heroFadeIn 1.4s 0.6s ease-out both;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      width: min(500px, 90%);
+      animation: heroFadeIn 1.4s 0.7s ease-out both;
+    }
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .hero-divider-icon { color: var(--gold); font-size: 1.2rem; }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: heroFadeIn 1.4s 0.9s ease-out both;
+    }
+
+    .btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      box-shadow: 0 4px 20px rgba(201,162,39,0.35);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,162,39,0.5); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(253,251,245,0.4);
+    }
+    .btn-outline:hover { background: rgba(253,251,245,0.08); border-color: var(--gold); color: var(--gold-light); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(253,251,245,0.4);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: bounce 2s 2s infinite;
+      z-index: 1;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,30,61,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,162,39,0.3);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(253,251,245,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* ── LANGUAGE DROPDOWN ── */
+    .lang-switcher {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(201,162,39,0.1);
+      border: 1px solid rgba(201,162,39,0.35);
+      padding: 0.4rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .lang-btn:hover { background: rgba(201,162,39,0.2); border-color: var(--gold); }
+    .lang-btn svg { transition: transform 0.2s; }
+    .lang-switcher.open .lang-btn svg { transform: rotate(180deg); }
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      background: var(--navy);
+      border: 1px solid rgba(201,162,39,0.35);
+      min-width: 160px;
+      z-index: 200;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .lang-switcher.open .lang-dropdown { display: block; }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: rgba(253,251,245,0.75);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-bottom: 1px solid rgba(201,162,39,0.1);
+      cursor: pointer;
+    }
+    .lang-option:last-child { border-bottom: none; }
+    .lang-option:hover { background: rgba(201,162,39,0.12); color: var(--gold-light); }
+    .lang-option.active { color: var(--gold-light); background: rgba(201,162,39,0.08); }
+    .lang-flag { font-size: 1rem; line-height: 1; }
+
+    /* ── SECTION SHELL ── */
+    section { padding: 6rem 2rem; }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .section-rule {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 3rem;
+    }
+
+    /* ── SEARCH ── */
+    .search-section {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--royal) 100%);
+      padding: 4rem 2rem;
+    }
+    .section-title--search { color: var(--white); font-weight: 500; }
+    .search-section .section-label { color: var(--gold-light); font-weight: 200; }
+    .section-title--about { color: var(--white); font-weight: 100; }
+
+    /* ── AUTOCOMPLETE SEARCH ── */
+    .search-bar-wrap {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    .search-bar {
+      width: 100%;
+      padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      background: rgba(253,251,245,0.08);
+      border: 1px solid rgba(201,162,39,0.4);
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .search-bar::placeholder { color: rgba(253,251,245,0.4); }
+    .search-bar:focus { border-color: var(--gold); background: rgba(253,251,245,0.12); }
+    .search-icon {
+      position: absolute;
+      left: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .autocomplete-list {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--navy);
+      border: 1px solid rgba(201,162,39,0.4);
+      border-top: none;
+      z-index: 50;
+      max-height: 260px;
+      overflow-y: auto;
+      display: none;
+    }
+    .autocomplete-list.open { display: block; }
+    .autocomplete-item {
+      padding: 0.75rem 1.2rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      border-bottom: 1px solid rgba(201,162,39,0.1);
+      transition: background 0.15s;
+    }
+    .autocomplete-item:last-child { border-bottom: none; }
+    .autocomplete-item:hover, .autocomplete-item.highlighted {
+      background: rgba(201,162,39,0.12);
+    }
+    .autocomplete-item-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      color: var(--white);
+    }
+    .autocomplete-item-name mark {
+      background: transparent;
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+    .autocomplete-item-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(253,251,245,0.45);
+    }
+    .autocomplete-clear {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(253,251,245,0.4);
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+      display: none;
+      z-index: 2;
+    }
+    .autocomplete-clear.visible { display: block; }
+    .autocomplete-clear:hover { color: var(--gold); }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .pill {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid rgba(201,162,39,0.35);
+      color: rgba(253,251,245,0.7);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .pill:hover, .pill.active {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+
+    :root {
+      --j-goarch:    #0d5eaf;
+      --j-rocor:     #c0392b;
+      --j-oca:       #b22234;
+      --j-antioch:   #009a44;
+      --j-serbian:   #c6363c;
+      --j-bulgarian: #00734a;
+      --j-romanian:  #002B7F;
+      --j-ukrainian: #005BBB;
+      --j-coptic:    #8B0000;
+      --j-ethiopian: #078930;
+      --j-default:   #1a3a6e;
+    }
+
+    .map-section { background: var(--off-white); padding: 5rem 2rem; }
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+      align-items: start;
+    }
+    #map {
+      width: 100%;
+      height: 560px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 8px 40px rgba(13,30,61,0.15);
+    }
+    .map-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    .map-sidebar::-webkit-scrollbar { width: 4px; }
+    .map-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .map-sidebar::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    .church-card {
+      background: var(--white);
+      border: 1px solid rgba(201,162,39,0.25);
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      border-left: 3px solid transparent;
+    }
+    .church-card:hover, .church-card.active {
+      border-left-color: var(--gold);
+      box-shadow: 0 4px 16px rgba(13,30,61,0.1);
+      transform: translateX(3px);
+    }
+    .card-name { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .card-city { font-size: 0.85rem; color: var(--text-mid); display: flex; align-items: center; gap: 0.3rem; }
+    .card-city::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
+
+    .churches-section { background: var(--white); }
+    .church-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .church-full-card {
+      border: 1px solid rgba(201,162,39,0.2);
+      background: var(--white);
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .church-full-card:hover {
+      box-shadow: 0 12px 40px rgba(13,30,61,0.12);
+      transform: translateY(-4px);
+    }
+
+    .card-top-bar {
+      height: 7px;
+      background: linear-gradient(90deg, var(--j-default), #4a8fd4, var(--j-default));
+    }
+    [data-jurisdiction="GOARCH"] .card-top-bar {
+      background: linear-gradient(90deg, #0d5eaf, #ffffff 50%, #0d5eaf);
+    }
+    [data-jurisdiction="ROCOR"] .card-top-bar {
+      background: linear-gradient(90deg, #ffffff 20%, #1c3f8f 50%, #d52b1e 80%);
+    }
+    [data-jurisdiction="OCA"] .card-top-bar {
+      background: linear-gradient(90deg, #b22234 30%, #ffffff 50%, #3c3b6e 70%);
+    }
+    [data-jurisdiction="Antioch"] .card-top-bar,
+    [data-jurisdiction="AOCANA"] .card-top-bar,
+    [data-jurisdiction="Antiochian"] .card-top-bar {
+      background: linear-gradient(90deg, #d52b1e 25%, #ffffff 50%, #009a44 75%);
+    }
+    [data-jurisdiction="Serbian"] .card-top-bar {
+      background: linear-gradient(90deg, #c6363c 25%, #0c4076 50%, #c6363c 75%);
+    }
+    [data-jurisdiction="Bulgarian"] .card-top-bar {
+      background: linear-gradient(90deg, #ffffff 20%, #00734a 50%, #d62612 80%);
+    }
+    [data-jurisdiction="Romanian"] .card-top-bar {
+      background: linear-gradient(90deg, #002B7F 25%, #FCD116 50%, #CE1126 75%);
+    }
+    [data-jurisdiction="Ukrainian"] .card-top-bar {
+      background: linear-gradient(90deg, #005BBB 40%, #FFD500 60%);
+    }
+    [data-jurisdiction="Coptic"] .card-top-bar {
+      background: linear-gradient(90deg, #ce1126 25%, #ffffff 50%, #000000 75%);
+    }
+    [data-jurisdiction="Ethiopian"] .card-top-bar {
+      background: linear-gradient(90deg, #078930 25%, #FCDD09 50%, #DA121A 75%);
+    }
+
+    .jurisdiction-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+    .chip-GOARCH     { background: #0d5eaf; }
+    .chip-ROCOR      { background: #c0392b; }
+    .chip-OCA        { background: #3c3b6e; }
+    .chip-Antioch,
+    .chip-AOCANA,
+    .chip-Antiochian { background: #009a44; }
+    .chip-Serbian    { background: #c6363c; }
+    .chip-Bulgarian  { background: #00734a; }
+    .chip-Romanian   { background: #002B7F; }
+    .chip-Ukrainian  { background: #005BBB; }
+    .chip-Coptic     { background: #8B0000; }
+    .chip-Ethiopian  { background: #078930; }
+    .chip-default    { background: var(--royal); }
+
+    .card-body { padding: 1.5rem; }
+    .card-patron { font-family: 'Josefin Sans', sans-serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .card-location {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .card-location svg { margin-top: 3px; flex-shrink: 0; }
+
+    .card-schedule-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .schedule-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .schedule-items li {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      padding: 0.3rem 0.6rem;
+      background: linear-gradient(90deg, rgba(201,162,39,0.07), transparent);
+      border-left: 2px solid rgba(201,162,39,0.3);
+    }
+
+    .card-priest-row {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .card-priest-name { font-weight: 600; color: var(--navy); }
+    .card-priest-rank {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .card-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border: 1px solid;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .card-btn-primary {
+      background: var(--navy);
+      color: var(--gold-light);
+      border-color: var(--navy);
+    }
+    .card-btn-primary:hover { background: var(--royal); }
+    .card-btn-ghost {
+      background: transparent;
+      color: var(--navy);
+      border-color: rgba(13,30,61,0.25);
+    }
+    .card-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .has-calendar {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      text-transform: uppercase;
+    }
+
+    .see-more-wrap {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      text-align: center;
+    }
+    .see-more-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.5rem;
+      background: transparent;
+      border: 1px solid rgba(13,30,61,0.3);
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .see-more-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 4px 16px rgba(201,162,39,0.12);
+    }
+    .see-more-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+    .results-count {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13,30,61,0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      width: min(640px, 95vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      border-top: 4px solid var(--gold);
+      padding: 2.5rem;
+      position: relative;
+      animation: modalIn 0.3s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-mid);
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--navy); }
+    .modal-church-name { font-family: 'Cinzel Decorative', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .modal-church-city {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .modal-rule { height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 1.5rem; }
+    .modal-section-head {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-priest-block {
+      background: rgba(201,162,39,0.06);
+      border: 1px solid rgba(201,162,39,0.2);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .modal-priest-entry { display: flex; flex-direction: column; gap: 0.15rem; }
+    .modal-priest-entry-name {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .modal-priest-entry-rank {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .modal-priest-entry-contact {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.2rem;
+    }
+    .modal-priest-entry-contact a { color: var(--text-mid); text-decoration: none; }
+    .modal-priest-entry-contact a:hover { color: var(--gold); }
+
+    .event-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .event-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 0.8rem;
+      border: 1px solid rgba(201,162,39,0.15);
+    }
+    .event-date { text-align: center; background: var(--navy); color: var(--white); padding: 0.5rem; }
+    .event-date-month { font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+    .event-date-day { font-family: 'Josefin Sans', sans-serif; font-size: 1.5rem; line-height: 1; }
+    .event-title { font-family: 'Josefin Sans', sans-serif; font-size: 0.9rem; color: var(--navy); }
+    .event-time { font-size: 0.82rem; color: var(--text-mid); margin-top: 0.2rem; }
+
+    .loading-spinner { text-align: center; padding: 2rem; color: var(--text-mid); font-style: italic; }
+
+    footer {
+      background: var(--navy);
+      color: rgba(253,251,245,0.6);
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(201,162,39,0.25);
+    }
+    .footer-cross { font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
+    .footer-title { font-family: 'Josefin Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.25em; color: var(--white); margin-bottom: 0.5rem; }
+    footer p { font-size: 0.82rem; line-height: 1.7; }
+    footer a { color: var(--gold-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      padding: 1rem 1.5rem;
+      border-left: 3px solid var(--gold);
+      z-index: 300;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .map-container { grid-template-columns: 1fr; }
+      #map { height: 360px; }
+      .map-sidebar { max-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-logo">☩ Ορθόδοξες Εκκλησίες ΒΚ</div>
+    <ul class="nav-links">
+      <!-- Language Switcher — top left in nav -->
+      <li>
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" onclick="toggleLang(event)" aria-label="Επιλογή γλώσσας">
+            <span class="lang-flag">🇬🇷</span>
+            ΕΛ
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="lang-dropdown">
+            <a class="lang-option" href="index.html">
+              <span class="lang-flag">🇺🇸</span> English
+            </a>
+            <a class="lang-option active" href="index_gr.html">
+              <span class="lang-flag">🇬🇷</span> Ελληνικά
+            </a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#churches">Βρείτε Εκκλησία</a></li>
+      <li><a href="#map-section">Χάρτης</a></li>
+      <li><a href="#about">Σχετικά</a></li>
+      <li><a href="reviews.html">Παρουσιάσεις Εκκλησιών</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="cross-ornament">☩ ☩ ☩</div>
+      <h1 class="hero-title">
+        Ορθόδοξες Εκκλησίες
+        <span>της Βόρειας Καρολίνας</span>
+      </h1>
+      <p class="hero-subtitle">Όλες οι Ορθόδοξες Εκκλησίες στη Βόρεια Καρολίνα</p>
+      <div class="hero-divider">
+        <span class="hero-divider-icon">✦</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#churches" class="btn btn-gold">☩ Βρείτε Εκκλησία</a>
+        <a href="#map-section" class="btn btn-outline">Προβολή Χάρτη</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Κύλιση</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+        <path d="M8 0v20M2 14l6 8 6-8" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── SEARCH & FILTER ── -->
+  <section class="search-section" id="churches">
+    <div class="section-label">Αναζήτηση</div>
+    <h2 class="section-title section-title--search">Βρείτε την Ενορία σας</h2>
+    <div class="section-rule"></div>
+
+    <div class="search-bar-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" class="search-bar" id="searchInput"
+             placeholder="Αναζήτηση με πόλη, όνομα ή προστάτη…"
+             autocomplete="off"
+             oninput="onSearchInput()"
+             onkeydown="onSearchKeydown(event)"
+             onfocus="showAutocomplete()"
+             onblur="hideAutocomplete()">
+      <button class="autocomplete-clear" id="searchClear" onclick="clearSearch()">×</button>
+      <div class="autocomplete-list" id="autocompleteList"></div>
+    </div>
+
+    <div class="section-label" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:0.75rem;">Τοποθεσία</div>
+    <div class="filter-pills" id="filterPills">
+      <button class="pill active" onclick="setFilter('all', this)">Όλες οι Ενορίες</button>
+      <button class="pill" onclick="setFilter('Charlotte', this)">Σάρλοτ</button>
+      <button class="pill" onclick="setFilter('Raleigh', this)">Ράλι</button>
+      <button class="pill" onclick="setFilter('Greensboro', this)">Γκρίνσμπορο</button>
+    </div>
+
+    <div class="section-label" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:1.5rem;">Δικαιοδοσία</div>
+    <div style="display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; max-width:800px; margin:1rem auto 0;">
+      <button class="pill active" id="jurisAllBtn"
+        onclick="setJurisdictionFilter('all', this)">Όλες οι Δικαιοδοσίες</button>
+      <span id="jurisdictionFilters" style="display:contents;"></span>
+    </div>
+
+    <div class="section-label" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:1.5rem;">Γλώσσες</div>
+    <div id="languageFilters" style="display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; max-width:800px; margin:1rem auto 0;">
+      <button class="pill active" onclick="setLanguageFilter('all', this)">Όλες οι Γλώσσες</button>
+      <button class="pill" onclick="setLanguageFilter('Bilingual', this)">Δίγλωσσες</button>
+      <button class="pill" onclick="setLanguageFilter('English', this)">Μόνο Αγγλικά</button>
+    </div>
+  </section>
+
+  <!-- ── MAP ── -->
+  <section class="map-section" id="map-section">
+    <div class="section-label">Τοποθεσία</div>
+    <h2 class="section-title">Χάρτης Ενοριών</h2>
+    <div class="section-rule"></div>
+
+    <div class="map-container">
+      <div id="map">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;
+                    background:linear-gradient(135deg,#e8e3d5,#f0ead8);
+                    font-family:'Josefin Sans',sans-serif;color:#2c4a80;font-size:0.9rem;
+                    letter-spacing:0.15em;text-transform:uppercase;gap:0.75rem;">
+          <span style="font-size:1.5rem;color:#c9a227">⊕</span>
+          Φόρτωση Χάρτη — Απαιτείται Κλειδί API Google Maps
+        </div>
+      </div>
+      <div class="map-sidebar" id="mapSidebar"></div>
+    </div>
+  </section>
+
+  <!-- ── CHURCH GRID ── -->
+  <section class="churches-section" style="padding-top: 5rem;" id="church-grid-section">
+    <div class="section-label">Ενορίες</div>
+    <h2 class="section-title">Όλες οι Εκκλησίες</h2>
+    <div class="section-rule"></div>
+    <div class="results-count" id="resultsCount" style="text-align:center;"></div>
+    <div class="church-grid" id="churchGrid"></div>
+    <div class="see-more-wrap" id="seeMoreWrap" style="display:none;">
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:0.75rem;letter-spacing:0.15em;
+                  color:var(--text-mid);text-transform:uppercase;margin-bottom:0.75rem;"
+           id="seeMoreCounter"></div>
+      <button class="see-more-btn" id="seeMoreBtn" onclick="loadMore()">
+        ☩ Εμφάνιση Περισσότερων Ενοριών
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about" style="background:var(--navy); color:var(--white); text-align:center;">
+    <div class="section-label" style="color:var(--gold-light)">Σχετικά με τον Κατάλογο</div>
+    <h2 class="section-title section-title--about">Ένας Κοινοτικός Πόρος</h2>
+    <div class="section-rule"></div>
+    <p style="max-width:620px; margin:0 auto; font-size:1.05rem; line-height:1.9; color:rgba(253,251,245,0.8);">
+      Αυτός ο κατάλογος εξυπηρετεί τους Ορθόδοξους πιστούς και τους ενδιαφερόμενους σε όλη τη Βόρεια Καρολίνα,
+      παρέχοντας έναν εύκολο τρόπο εντοπισμού ενοριών, προβολής προγραμμάτων λειτουργιών, επικοινωνίας με τον κλήρο
+      και σύνδεσης με τοπικές κοινότητες. Τα προγράμματα ενοριών προέρχονται απευθείας από το ημερολόγιο κάθε εκκλησίας.
+    </p>
+    <p style="margin-top:1.5rem; font-family:'Josefin Sans',sans-serif; font-size:0.8rem;
+              letter-spacing:0.2em; color:var(--gold); text-transform:uppercase;">
+      ☩ &nbsp; Μητρόπολη Ατλάντας — Ελληνορθόδοξη Αρχιεπισκοπή Αμερικής &nbsp; ☩
+    </p>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-cross">☩</div>
+    <div class="footer-title">Ορθόδοξες Εκκλησίες Βόρειας Καρολίνας</div>
+    <p>Τα δεδομένα προέρχονται από τα Google Ημερολόγια των επιμέρους ενοριών.<br>
+       Για προσθήκη ή ενημέρωση καταχώρισης, <a href="mailto:nolancoords@gmail.com">επικοινωνήστε μαζί μας</a>.</p>
+    <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">
+      &copy; <span id="year"></span> — Κατάλογος Ορθόδοξης Χριστιανικής Κοινότητας
+    </p>
+  </footer>
+
+  <!-- ── SCHEDULE MODAL ── -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- ── TOAST ── -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ── LANGUAGE DROPDOWN ── */
+    function toggleLang(e) {
+      e.stopPropagation();
+      document.getElementById('langSwitcher').classList.toggle('open');
+    }
+    document.addEventListener('click', () => {
+      document.getElementById('langSwitcher').classList.remove('open');
+    });
+
+    /* ── GLOBALS ── */
+    let churches         = [];
+    let filtered         = [];
+    let activeFilter     = 'all';
+    let activeJurisdiction = 'all';
+    let activeLanguage   = 'all';
+    let googleMap        = null;
+    let markers          = [];
+    const PAGE_SIZE      = 9;
+    let visibleCount     = PAGE_SIZE;
+    let acHighlight      = -1;
+
+    /* ── LOAD DATA ── */
+    async function loadChurches() {
+      try {
+        const res = await fetch('churchdata.json');
+        churches = await res.json();
+      } catch (e) {
+        churches = [];
+        console.warn('churchdata.json not found:', e);
+      }
+      filtered = [...churches];
+      renderJurisdictionFilter();
+      renderGrid();
+      renderMapSidebar();
+    }
+
+    function getPriestInfo(churchId) {
+      const church = churches.find(c => c.id === churchId);
+      if (!church || !church.contactInfo) return [];
+      return Object.values(church.contactInfo)
+        .map(p => ({
+          name: p.name || '', rank: p.rank || '',
+          email: p.email || '', phone: p.phone || '',
+          appointment: p.appointment || ''
+        }))
+        .sort((a, b) => {
+          if (a.rank === 'Proistamenos') return -1;
+          if (b.rank === 'Proistamenos') return  1;
+          return 0;
+        });
+    }
+
+    function chipClass(j) {
+      if (!j) return 'chip-default';
+      const map = {
+        'goarch': 'chip-GOARCH', 'rocor': 'chip-ROCOR', 'oca': 'chip-OCA',
+        'antioch': 'chip-Antioch', 'aocana': 'chip-Antioch', 'antiochian': 'chip-Antioch',
+        'serbian': 'chip-Serbian', 'bulgarian': 'chip-Bulgarian', 'romanian': 'chip-Romanian',
+        'ukrainian': 'chip-Ukrainian', 'coptic': 'chip-Coptic', 'ethiopian': 'chip-Ethiopian',
+      };
+      return map[j.toLowerCase()] || 'chip-default';
+    }
+
+    /* ── AUTOCOMPLETE ── */
+    function getSuggestions(q) {
+      if (!q || q.length < 1) return [];
+      const lower = q.toLowerCase();
+      return churches.filter(c =>
+        c.name.toLowerCase().includes(lower) ||
+        (c.city && c.city.toLowerCase().includes(lower)) ||
+        (c.patron && c.patron.toLowerCase().includes(lower)) ||
+        (c.address && c.address.toLowerCase().includes(lower))
+      ).slice(0, 8);
+    }
+
+    function highlightMatch(text, q) {
+      if (!q) return text;
+      const idx = text.toLowerCase().indexOf(q.toLowerCase());
+      if (idx === -1) return text;
+      return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + q.length) + '</mark>' + text.slice(idx + q.length);
+    }
+
+    function renderAutocomplete(suggestions, q) {
+      const list = document.getElementById('autocompleteList');
+      if (!suggestions.length) { list.classList.remove('open'); return; }
+      list.innerHTML = suggestions.map((c, i) => `
+        <div class="autocomplete-item" data-idx="${i}" onmousedown="selectSuggestion('${c.id}')">
+          <div class="autocomplete-item-name">${highlightMatch(c.name, q)}</div>
+          <div class="autocomplete-item-sub">${c.city || ''}, NC${c.jurisdiction ? ' · ' + c.jurisdiction : ''}</div>
+        </div>
+      `).join('');
+      acHighlight = -1;
+      list.classList.add('open');
+    }
+
+    function showAutocomplete() {
+      const q = document.getElementById('searchInput').value.trim();
+      if (q.length >= 1) renderAutocomplete(getSuggestions(q), q);
+    }
+
+    function hideAutocomplete() {
+      setTimeout(() => {
+        document.getElementById('autocompleteList').classList.remove('open');
+        acHighlight = -1;
+      }, 180);
+    }
+
+    function onSearchInput() {
+      const input = document.getElementById('searchInput');
+      const q = input.value;
+      document.getElementById('searchClear').classList.toggle('visible', q.length > 0);
+      const suggestions = getSuggestions(q.trim());
+      renderAutocomplete(suggestions, q.trim());
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+    }
+
+    function onSearchKeydown(e) {
+      const list = document.getElementById('autocompleteList');
+      const items = list.querySelectorAll('.autocomplete-item');
+      if (!items.length) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        acHighlight = Math.min(acHighlight + 1, items.length - 1);
+        items.forEach((el, i) => el.classList.toggle('highlighted', i === acHighlight));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        acHighlight = Math.max(acHighlight - 1, 0);
+        items.forEach((el, i) => el.classList.toggle('highlighted', i === acHighlight));
+      } else if (e.key === 'Enter') {
+        if (acHighlight >= 0 && items[acHighlight]) items[acHighlight].dispatchEvent(new MouseEvent('mousedown'));
+        list.classList.remove('open');
+      } else if (e.key === 'Escape') {
+        list.classList.remove('open');
+      }
+    }
+
+    function selectSuggestion(id) {
+      const c = churches.find(ch => ch.id === id);
+      if (!c) return;
+      document.getElementById('searchInput').value = c.name;
+      document.getElementById('searchClear').classList.add('visible');
+      document.getElementById('autocompleteList').classList.remove('open');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+      setTimeout(() => document.getElementById('church-grid-section').scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      document.getElementById('searchClear').classList.remove('visible');
+      document.getElementById('autocompleteList').classList.remove('open');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+      input.focus();
+    }
+
+    /* ── FILTERS ── */
+    function setFilter(city, btn) {
+      activeFilter = city;
+      document.querySelectorAll('#filterPills .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+    }
+
+    function setJurisdictionFilter(j, btn) {
+      activeJurisdiction = j;
+      document.querySelectorAll('#jurisAllBtn, #jurisdictionFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+    }
+
+    function setLanguageFilter(lang, btn) {
+      activeLanguage = lang;
+      document.querySelectorAll('#languageFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      visibleCount = PAGE_SIZE;
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      filtered = churches.filter(c => {
+        const cityMatch  = activeFilter === 'all' || c.city === activeFilter;
+        const jurisMatch = activeJurisdiction === 'all' || c.jurisdiction === activeJurisdiction;
+        const langMatch  = activeLanguage === 'all' ? true
+          : activeLanguage === 'Bilingual'
+            ? c.languages && c.languages.length > 1
+            : c.languages && c.languages.length === 1 && c.languages.some(l => l.toLowerCase() === activeLanguage.toLowerCase());
+        const textMatch  = !q ||
+          (c.name && c.name.toLowerCase().includes(q)) ||
+          (c.city && c.city.toLowerCase().includes(q)) ||
+          (c.patron && c.patron.toLowerCase().includes(q)) ||
+          (c.address && c.address.toLowerCase().includes(q)) ||
+          (c.jurisdiction && c.jurisdiction.toLowerCase().includes(q)) ||
+          (c.priest && c.priest.toLowerCase().includes(q));
+        return cityMatch && jurisMatch && langMatch && textMatch;
+      });
+      renderGrid();
+      renderMapSidebar();
+      updateMapMarkers();
+    }
+
+    function loadMore() {
+      visibleCount += PAGE_SIZE;
+      renderGrid(true);
+    }
+
+    function renderJurisdictionFilter() {
+      const jurisdictions = [...new Set(churches.map(c => c.jurisdiction).filter(Boolean))];
+      const container = document.getElementById('jurisdictionFilters');
+      if (!container) return;
+      container.innerHTML = jurisdictions.map(j =>
+        `<button class="pill" onclick="setJurisdictionFilter('${j}', this)">${j}</button>`
+      ).join('');
+    }
+
+    /* ── RENDER GRID ── */
+    function renderGrid(append = false) {
+      const grid = document.getElementById('churchGrid');
+      const total = filtered.length;
+      const showing = Math.min(visibleCount, total);
+
+      const countEl = document.getElementById('resultsCount');
+      if (total === 0) {
+        countEl.textContent = '';
+      } else {
+        countEl.textContent = `Εμφάνιση ${showing} από ${total} ενορί${total !== 1 ? 'ες' : 'α'}`;
+      }
+
+      if (total === 0) {
+        grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; font-family:'Josefin Sans',sans-serif; color:var(--text-mid); padding:3rem 0;">Δεν βρέθηκαν ενορίες που να αντιστοιχούν στην αναζήτησή σας.</p>`;
+        document.getElementById('seeMoreWrap').style.display = 'none';
+        return;
+      }
+
+      const slice = filtered.slice(0, showing);
+
+      grid.innerHTML = slice.map(c => {
+        const priests = getPriestInfo(c.id);
+        const priestHTML = priests.length
+          ? priests.map(p => `
+              <div class="card-priest-row">
+                <span class="card-priest-rank">${p.rank || 'Κλήρος'}</span>
+                <span class="card-priest-name">☩ ${p.name}</span>
+              </div>`).join('')
+          : (c.priest ? `<div class="card-priest-row"><span class="card-priest-name">☩ ${c.priest}</span></div>` : '');
+
+        const primaryPriest = priests.find(p => p.rank === 'Proistamenos') || priests[0];
+        const emailAddr = (primaryPriest && primaryPriest.email) || c.priestEmail || '';
+        const emailBtn = emailAddr
+          ? `<a class="card-btn card-btn-ghost" href="mailto:${emailAddr}" style="text-decoration:none;">✉ Email Ιερέα</a>`
+          : '';
+        const chipCls = chipClass(c.jurisdiction);
+
+        return `
+          <article class="church-full-card" data-id="${c.id}" data-jurisdiction="${c.jurisdiction || ''}">
+            <div class="card-top-bar"></div>
+            ${c.hasCalendar ? '<span class="has-calendar">☩ Ημερολόγιο</span>' : ''}
+            <div class="card-body">
+              ${c.jurisdiction ? `<div class="jurisdiction-chip ${chipCls}">${c.jurisdiction}</div>` : ''}
+              <div class="card-patron">${c.name}</div>
+              <div class="card-location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                  <circle cx="12" cy="9" r="2.5"/>
+                </svg>
+                ${c.address}
+              </div>
+              <div class="card-schedule-label">Τακτικές Λειτουργίες</div>
+              <ul class="schedule-items">
+                ${(c.services || []).map(s => `<li>${s}</li>`).join('')}
+              </ul>
+              ${priestHTML}
+              <div class="card-actions">
+                <button class="card-btn card-btn-primary" onclick="openSchedule('${c.id}')">
+                  ☩ Πλήρες Πρόγραμμα
+                </button>
+                ${emailBtn}
+                ${c.website ? `<a class="card-btn card-btn-ghost" href="${c.website}" target="_blank" rel="noopener" style="text-decoration:none;">Ιστότοπος ↗</a>` : ''}
+                <button class="card-btn card-btn-ghost" onclick="panToChurch('${c.id}')">Χάρτης ⊕</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      const seeMoreWrap = document.getElementById('seeMoreWrap');
+      const seeMoreBtn  = document.getElementById('seeMoreBtn');
+      const counter     = document.getElementById('seeMoreCounter');
+
+      if (showing < total) {
+        seeMoreWrap.style.display = 'block';
+        const remaining = total - showing;
+        counter.textContent = `${showing} από ${total} εμφανίζονται`;
+        seeMoreBtn.disabled = false;
+        seeMoreBtn.innerHTML = `☩ Εμφάνιση ${Math.min(PAGE_SIZE, remaining)} Ακόμα Ενοριών
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>`;
+      } else if (total > PAGE_SIZE) {
+        seeMoreWrap.style.display = 'block';
+        counter.textContent = `Εμφανίζονται και οι ${total} ενορίες`;
+        seeMoreBtn.innerHTML = `☩ Λιγότερα ↑`;
+        seeMoreBtn.onclick = () => {
+          visibleCount = PAGE_SIZE;
+          seeMoreBtn.onclick = loadMore;
+          renderGrid();
+          document.getElementById('church-grid-section').scrollIntoView({ behavior: 'smooth' });
+        };
+      } else {
+        seeMoreWrap.style.display = 'none';
+      }
+    }
+
+    /* ── MAP SIDEBAR ── */
+    function renderMapSidebar() {
+      const sidebar = document.getElementById('mapSidebar');
+      sidebar.innerHTML = filtered.map(c => `
+        <div class="church-card" data-id="${c.id}" onclick="panToChurch('${c.id}')">
+          <div class="card-name">${c.name}</div>
+          <div class="card-city">${c.city}, NC</div>
+        </div>
+      `).join('');
+    }
+
+    /* ── GOOGLE MAPS ── */
+    function initMap() {
+      googleMap = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 35.5, lng: -79.0 },
+        zoom: 7,
+        mapTypeId: 'roadmap',
+        styles: [
+          { elementType: 'geometry', stylers: [{ color: '#e8e3d5' }] },
+          { elementType: 'labels.text.stroke', stylers: [{ color: '#fdfbf5' }] },
+          { elementType: 'labels.text.fill', stylers: [{ color: '#0d1e3d' }] },
+          { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#c9a227' }] },
+          { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#ffffff' }] },
+          { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#1a3a6e' }] },
+          { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#4a8fd4' }] },
+          { featureType: 'poi', stylers: [{ visibility: 'off' }] }
+        ]
+      });
+      updateMapMarkers();
+    }
+
+    function updateMapMarkers() {
+      markers.forEach(m => m.setMap(null));
+      markers = [];
+      if (!googleMap) return;
+      const infoWindow = new google.maps.InfoWindow();
+      filtered.forEach(c => {
+        const marker = new google.maps.Marker({
+          position: { lat: c.lat, lng: c.lng },
+          map: googleMap,
+          title: c.name,
+          icon: {
+            path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z',
+            fillColor: '#c9a227', fillOpacity: 1,
+            strokeColor: '#0d1e3d', strokeWeight: 1.5,
+            scale: 1.5, anchor: new google.maps.Point(12, 22)
+          }
+        });
+        marker.addListener('click', () => {
+          infoWindow.setContent(`
+            <div style="font-family:'Cinzel',serif;color:#0d1e3d;min-width:200px;padding:0.5rem 0;">
+              <strong style="font-size:0.9rem;">${c.name}</strong><br>
+              <span style="font-size:0.78rem;color:#2c4a80;">${c.city}, NC</span><br>
+              <button onclick="openSchedule('${c.id}')"
+                style="margin-top:0.6rem;padding:0.35rem 0.9rem;background:#0d1e3d;color:#e8c84a;
+                       border:none;font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;cursor:pointer;">
+                ☩ Πρόγραμμα
+              </button>
+            </div>`);
+          infoWindow.open(googleMap, marker);
+          highlightSidebarCard(c.id);
+        });
+        markers.push(marker);
+      });
+    }
+
+    function panToChurch(id) {
+      const c = churches.find(ch => ch.id === id);
+      if (!c) return;
+      document.getElementById('map-section').scrollIntoView({ behavior: 'smooth' });
+      if (googleMap) {
+        setTimeout(() => { googleMap.panTo({ lat: c.lat, lng: c.lng }); googleMap.setZoom(14); }, 400);
+      }
+      highlightSidebarCard(id);
+    }
+
+    function highlightSidebarCard(id) {
+      document.querySelectorAll('.church-card').forEach(el => el.classList.remove('active'));
+      const el = document.querySelector(`.church-card[data-id="${id}"]`);
+      if (el) { el.classList.add('active'); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    }
+
+    /* ── SCHEDULE MODAL ── */
+    async function openSchedule(id) {
+      const c = churches.find(ch => ch.id === id);
+      if (!c) return;
+      const modal   = document.getElementById('modal');
+      const content = document.getElementById('modalContent');
+      modal.classList.add('open');
+      content.innerHTML = `
+        <div class="modal-church-name">${c.name}</div>
+        <div class="modal-church-city">☩ ${c.city}, Βόρεια Καρολίνα</div>
+        <div class="modal-rule"></div>
+        <div class="loading-spinner">Φόρτωση προγράμματος…</div>`;
+
+      let events = null;
+      if (c.hasCalendar) {
+        try {
+          const res = await fetch(`/api/schedule/${c.id}`);
+          if (res.ok) events = await res.json();
+        } catch (e) { /* fall through */ }
+      }
+
+      const priests = getPriestInfo(c.id);
+      let priestBlockHTML = '';
+      if (priests.length) {
+        const priestRows = priests.map(p => `
+          <div class="modal-priest-entry">
+            <div class="modal-priest-entry-name">☩ ${p.name}</div>
+            <div class="modal-priest-entry-rank">${p.rank || 'Κλήρος'}</div>
+            <div class="modal-priest-entry-contact">
+              ${p.phone ? `<a href="tel:${p.phone}">📞 ${p.phone}</a>` : ''}
+              ${p.email ? `<a href="mailto:${p.email}">✉ ${p.email}</a>` : ''}
+              ${p.appointment ? `<a href="mailto:${p.appointment}">📅 ${p.appointment}</a>` : ''}
+            </div>
+          </div>`).join('');
+        priestBlockHTML = `<div class="modal-section-head">Κλήρος</div><div class="modal-priest-block">${priestRows}</div>`;
+      } else if (c.priest) {
+        priestBlockHTML = `
+          <div class="modal-section-head">Κλήρος</div>
+          <div class="modal-priest-block">
+            <div class="modal-priest-entry">
+              <div class="modal-priest-entry-name">☩ ${c.priest}</div>
+              <div class="modal-priest-entry-contact">
+                ${c.phone       ? `<a href="tel:${c.phone}">📞 ${c.phone}</a>` : ''}
+                ${c.priestEmail ? `<a href="mailto:${c.priestEmail}">✉ ${c.priestEmail}</a>` : ''}
+              </div>
+            </div>
+          </div>`;
+      }
+
+      let eventsHTML = '';
+      if (events && events.length) {
+        eventsHTML = `
+          <div class="modal-section-head">Επερχόμενες Εκδηλώσεις</div>
+          <ul class="event-list">
+            ${events.slice(0, 8).map(ev => {
+              const d = new Date(ev.start);
+              const month = d.toLocaleString('el-GR', { month: 'short' }).toUpperCase();
+              const day = d.getDate();
+              const time = d.toLocaleTimeString('el-GR', { hour: 'numeric', minute: '2-digit', hour12: false });
+              return `
+                <li class="event-item">
+                  <div class="event-date">
+                    <div class="event-date-month">${month}</div>
+                    <div class="event-date-day">${day}</div>
+                  </div>
+                  <div>
+                    <div class="event-title">${ev.summary || 'Λειτουργία'}</div>
+                    <div class="event-time">${time}</div>
+                    ${ev.location ? `<div class="event-time">${ev.location}</div>` : ''}
+                  </div>
+                </li>`;
+            }).join('')}
+          </ul>`;
+      } else {
+        eventsHTML = `
+          <div class="modal-section-head">Τακτικό Πρόγραμμα Λειτουργιών</div>
+          <ul class="schedule-items" style="margin-bottom:1.5rem;">
+            ${(c.services || []).map(s => `<li>${s}</li>`).join('')}
+          </ul>
+          <p style="font-size:0.85rem;color:var(--text-mid);font-style:italic;">
+            ${c.hasCalendar
+              ? 'Τα ζωντανά συμβάντα ημερολογίου θα εμφανιστούν εδώ μόλις εκκινήσει το backend.'
+              : 'Δεν έχει συνδεθεί ακόμα Google Ημερολόγιο για αυτή την ενορία.'}
+          </p>`;
+      }
+
+      const actionsHTML = `
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+          ${c.phone ? `<a class="card-btn card-btn-primary" href="tel:${c.phone}" style="text-decoration:none;">📞 ${c.phone}</a>` : ''}
+          ${c.website ? `<a class="card-btn card-btn-ghost" href="${c.website}" target="_blank" rel="noopener" style="text-decoration:none;">Ιστότοπος ↗</a>` : ''}
+          <button class="card-btn card-btn-ghost" onclick="panToChurch('${c.id}'); closeModal()">Χάρτης ⊕</button>
+          <button class="card-btn card-btn-ghost" onclick="loadReviewOverview('${c.id}')">✦ Δείτε Παρουσίαση</button>
+          <button class="card-btn card-btn-ghost" onclick="loadReviews('${c.id}')">✎ Δείτε Κριτικές</button>
+        </div>
+        <div id="reviewSection" style="margin-top:1.5rem;"></div>`;
+
+      content.innerHTML = `
+        <div class="modal-church-name">${c.name}</div>
+        <div class="modal-church-city">☩ ${c.city}, Βόρεια Καρολίνα</div>
+        <div class="modal-rule"></div>
+        ${priestBlockHTML}
+        ${eventsHTML}
+        ${actionsHTML}`;
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('open');
+      }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    /* ── REVIEWS ── */
+    async function loadReviewOverview(id) {
+      const section = document.getElementById('reviewSection');
+      section.innerHTML = `<p style="font-style:italic;color:var(--text-mid);font-size:0.9rem;">Δημιουργία παρουσίασης…</p>`;
+      try {
+        const res = await fetch(`/api/reviews/${id}/overview`);
+        const { overview } = await res.json();
+        section.innerHTML = `
+          <div style="border-left:3px solid var(--gold);padding:1rem 1.2rem;background:rgba(201,162,39,0.06);margin-top:0.5rem;">
+            <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">✦ Παρουσίαση AI</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${overview}</p>
+          </div>`;
+      } catch {
+        section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Δεν ήταν δυνατή η φόρτωση της παρουσίασης.</p>`;
+      }
+    }
+
+    async function loadReviews(id) {
+      const section = document.getElementById('reviewSection');
+      section.innerHTML = `<p style="font-style:italic;color:var(--text-mid);font-size:0.9rem;">Φόρτωση κριτικών…</p>`;
+      try {
+        const res = await fetch(`/api/reviews/${id}`);
+        const reviews = await res.json();
+        if (!reviews.length) {
+          section.innerHTML = `<p style="font-family:'Josefin Sans',sans-serif;font-size:0.85rem;color:var(--text-mid);font-style:italic;">Δεν υπάρχουν κριτικές ακόμα. <a href="reviews.html" style="color:var(--gold);">Γίνετε ο πρώτος ↗</a></p>`;
+          return;
+        }
+        section.innerHTML = `
+          <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.75rem;">✎ Κριτικές</div>
+          ${reviews.map(r => `
+            <div style="padding:0.9rem;border:1px solid rgba(201,162,39,0.18);border-left:3px solid var(--gold);margin-bottom:0.75rem;background:rgba(201,162,39,0.04);">
+              <div style="font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem;">☩ ${r.author}</div>
+              <div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${r.text}</div>
+            </div>`).join('')}
+          <a href="reviews.html" style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;">✎ Γράψτε Κριτική ↗</a>`;
+      } catch {
+        section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Δεν ήταν δυνατή η φόρτωση των κριτικών.</p>`;
+      }
+    }
+
+    /* ── TOAST ── */
+    function showToast(msg, duration = 3500) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), duration);
+    }
+
+    /* ── INIT ── */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function start() {
+      await loadChurches();
+      await loadMapsAPI();
+    }
+    start();
+    window.initMap = initMap;
+
+    async function loadMapsAPI() {
+      try {
+        const res = await fetch('/api/config');
+        const { mapsApiKey } = await res.json();
+        if (!mapsApiKey) return;
+        const s = document.createElement('script');
+        s.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&callback=initMap`;
+        s.async = true; s.defer = true;
+        document.head.appendChild(s);
+      } catch(e) { console.error('Failed to load Maps API:', e); }
+    }
+  </script>
+</body>
+</html>

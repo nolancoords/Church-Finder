@@ -364,6 +364,8 @@
         "phone": "(919) 781-4548"
           }},
     "hasCalendar": false,
+    "lat": 35.85011771105787,
+    "lng": -78.67205185223241,
     "services": [
       "Orthros: Sun 8:30 AM",
       "Divine Liturgy: 10:00 AM"
@@ -380,8 +382,17 @@
     "address": "8306 NC-751, Durham, NC 27713",
     "phone": "(919) 484-1600",
     "website": "https://stbarbarachurchdurhamnc.com/",
-    "contactInfo": {},
+    "contactInfo": {
+      "Father Stavros": { 
+        "name": "Fr. Stavros",
+        "email": "fatherstavroforos2012@gmail.com"
+      }
+    },
+    "lat": 35.892874459785794,
+    "lng": -78.95867283493357,
     "services": [
+      "Orthros: Sun 9:00 AM", 
+      "Devine Liturgy: Sun 10:00 AM"
 ],
     "languages": ["English"]
   },
@@ -401,6 +412,8 @@
     "services": ["Vespers: Wed 6:30 PM",
                 "Vespers: Sat 5:30 PM",
                 "Divine Liturgy: Sun 10:00 AM"],
+    "lat": 35.747713903189904, 
+    "lng": -78.73065275479186,
     "languages": ["English"]
   },
   {
@@ -421,6 +434,8 @@
         "phone": "(704)807-0800"
       
   }},
+    "lat": 35.29247953392254, 
+    "lang":-80.7906439576711,
     "hasCalendar": false,
     "services": ["Great Vespers: Sat 5:00 PM", 
                   "Devine Liturgy: Sun 9:00 AM"],
@@ -443,6 +458,8 @@
         "email": "fr.robert.lawrence@gmail.com"
       }
     },
+    "lat": 35.60104573805442, 
+    "lng":-80.84691548650665, 
     "services": ["Orthros: Sun 8:30 AM", 
                 "Devine Liturgy: Sun 9:30 AM",
                 "Paraklisis: Wed 6:00 PM"],
@@ -475,6 +492,8 @@
       "Hours: Sun 9:40 AM",
       "Divine Liturgy: Sun 10:00 AM"
     ],
+    "lat": 35.70142522079032,
+    "lng":  -81.42830437781402,
     "hasCalendar": false,
     "languages": ["English"]
   },
@@ -498,6 +517,9 @@
       "Hours: Sun 9:45 AM",
       "Divine Liturgy: Sun 10:00 AM"
     ],
+
+    "lat": 36.06027231980287, 
+    "lng": -76.60501902144021,
     "hasCalendar": false,
     "languages": ["English"]
   },
@@ -517,6 +539,8 @@
         "phone": "(570)535-8212"
       }
     },
+    "lat": 35.51702636031257,
+    "lng":  -80.71723431534215, 
     "services": [
       "Matins: Sun 9:00 AM",
       "Devine Liturgy: Sun 10:00 AM"
@@ -539,6 +563,8 @@
         "phone": "(910) 572-3331"
       }
     },
+    "lat": 35.35308717799789, 
+    "lng": -79.91575193493357,
     "services": [
       "Matins: Sun 7:00 AM",
       "Devine Liturgy: Sun 9:00 AM"
@@ -563,11 +589,165 @@
         "phone": "(336) 593-3331"
       }
     },
+    "lat": 36.541349048081244, 
+    "lng": -80.26946463308474, 
     "services": [
       "Please Contact monastery for liturgy schedule"
     ],
     "hasCalendar": false,
     "languages": ["Greek"]
+  },
+    {
+    "id": "saint-george-highpoint",
+    "jurisdiction": "GOARCH",
+    "name": "St. George Greek Orthodox Church",
+    "patron": "St. George",
+    "city": "Highpoint",
+    "state": "NC",
+    "address": "808 N Hamilton St, High Point, NC 27262",
+    "phone": "(336) 889-9020",
+    "website": "https://www.saintgeorgehp.org/",
+    "contactInfo": {
+    },
+    "lat": 35.968106525197484,
+    "lng":  -80.01134576007146,  
+    "services": [
+      "Orthros: Sun 9:30 AM",
+      "Divine Liturgy: Sun 10:30 AM"
+    ],
+    "hasCalendar": false,
+    "languages": ["Greek"]
+  },
+    {
+    "id": "holy-trinity-mebane",
+    "jurisdiction": "ROCOR",
+    "name": "Holy Trinity Orthodox Church",
+    "patron": "The Holy Trinity",
+    "city": "Mebane",
+    "state": "NC",
+    "address": "6803 US-70, Mebane, NC 27302",
+    "phone": "(315)868-4527",
+    "website": "https://holytrinitytriangle.org/",
+    "contactInfo": {
+      "Father Peter": { 
+        "name": "Father Peter"
+      }
+    },
+    "lat": 36.088249158487336,
+    "lng":  -79.23533152419698, 
+    "services": [
+      "Vigil with Confessions: Sat 6:00 PM",
+      "Confessions: Sun 8:30 AM",
+      "Hours: Sun 9:30 AM",
+      "Divine Liturgy: 10:00 AM"
+    ],
+    "hasCalendar": true,
+    "ics": "https://calendar.google.com/calendar/ical/566f2240551724e4522d3bd29cb9c199442abca6264f46c699d7af534460a7bf%40group.calendar.google.com/public/basic.ics",
+    "languages": ["Russian"] 
+  },
+  {
+    "id": "all-saints-raleigh",
+    "jurisdiction": "ANTIOCH",
+    "name": "All Saints Antiochian Orthodox Church",
+    "patron": "All Saints",
+    "city": "Raleigh",
+    "state": "NC",
+    "address": "6803 US-70, Mebane, NC 27302",
+    "phone": "(315)868-4527",
+    "website": "https://www.allsaintsnc.org/",
+    "contactInfo": {
+      "Father Peter": { 
+        "name": "Fr. David", 
+        "appointment": "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ01-Ax9nqaspyxLw2l6YP57yHvQb0jIm1SWnYFQCjtcCTs6rnW5qWauipONWWZaLB80Y8icLjZ4?gv=true"
+      }
+    },
+    "lat": 35.7771654844497, 
+    "lng": -78.73060722509653,
+    "services": [
+      "Vigil with Confessions: Sat 6:00 PM",
+      "Confessions: Sun 8:30 AM",
+      "Hours: Sun 9:30 AM",
+      "Divine Liturgy: 10:00 AM"
+    ],
+    "hasCalendar": true,
+    "ics": "https://calendar.google.com/calendar/ical/lom6v9n0f545f91c2fi9fcmgsk%40group.calendar.google.com/public/basic.ics",
+    "languages": ["English"] 
+  },
+  {
+    "id": "saint-raphael-varina",
+    "jurisdiction": "ANTIOCH",
+    "name": "St. Raphael Orthodox Church",
+    "patron": "St. Raphael",
+    "city": "Fuquay-Varina",
+    "state": "NC",
+    "address": "1990 Stewart St, Fuquay-Varina, NC 27526",
+    "phone": "(919) 793-4473",
+    "website": "https://www.straphaelnc.org/",
+    "contactInfo": {
+      "please contact with information": { 
+        "name": "please contact with information"
+      }
+    },
+    "lat": 35.61151296399765,
+    "lng":  -78.78848616931562, 
+    "services": [
+      "Orthros: Sun 9:00 AM",
+      "Divine Liturgy: 10:00 AM"
+    ],
+    "hasCalendar": true,
+    "ics": "https://calendar.google.com/calendar/ical/a6lde5phk4gmd45834seh9vls8%40group.calendar.google.com/public/basic.ics",
+    "languages": ["English"] 
+  },
+  {
+    "id": "saint-basil-romanian",
+    "jurisdiction": "Romanian",
+    "name": "St. Basil the Great Romanian Orthodox Church",
+    "patron": "St. Basil",
+    "city": "Durham",
+    "state": "NC",
+    "address": "1902 W Main St, Durham, NC 27705",
+    "phone": "(919) 606-1913",
+    "website": "https://www.straphaelnc.org/",
+    "contactInfo": {
+      "Fr. Florin": { 
+        "name": "Fr. Florin Șipoș",
+        "Phone": "919-606-1913",
+        "email": "florin.sipos08@gmail.com"
+      }
+    },
+    "lat": 36.00678487207593, 
+    "lng": -78.92102255027577,
+    "services": [
+      "Divine Liturgy: 7:30 AM"
+    ],
+    "hasCalendar": false,
+    "languages": ["Romanian"] 
+  },
+  {
+    "id": "saint-constantine-feyettenam",
+    "jurisdiction": "GOARCH",
+    "name": "Saints Constantine and Helen Greek Orthodox Church",
+    "patron": "Saints Constantine and Helen",
+    "city": "Fayetteville",
+    "state": "NC",
+    "address": "614 Oakridge Ave, Fayetteville, NC 28305",
+    "phone": "(910) 484-2010",
+    "website": "https://www.faygreekchurch.com/",
+    "contactInfo": {
+      "Fr. Alexander Papagikos": { 
+        "name": "Fr. Alexander"
+      }
+    },
+    "lat": 35.06458085987235,
+    "lng":  -78.89945568096014, 
+    "services": [
+      "Orthros: Sun 9:15AM",
+      "Devine Liturgy: Sun 10:00 AM"
+    ],
+    "hasCalendar": false,
+    "languages": ["Romanian"] 
   }
+
+
   ]
      
