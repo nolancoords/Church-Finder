@@ -1927,7 +1927,7 @@
         if (!mapsApiKey) return;
         const s = document.createElement('script');
         s.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&callback=initMap`;
-        s.async = true;F
+        s.async = true;
         s.defer = true;
         document.head.appendChild(s);
       } catch(e) {
