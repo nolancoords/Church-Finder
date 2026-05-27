@@ -1,6 +1,6 @@
-cat > /home/claude/index_gr.html << 'HTMLEOF'
+
 <!DOCTYPE html>
-<html lang="el">
+<html lang="gr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -933,12 +933,14 @@ cat > /home/claude/index_gr.html << 'HTMLEOF'
       refEl.textContent  = `— ${formatBookName(v.book)} ${v.chapter}:${v.verse}`;
     }
 
-    /* ── LOAD DATA ── */
     async function loadChurches() {
       try {
         const res = await fetch('churchdata.json');
         churches = await res.json();
-      } catch (e) { churches = []; }
+      } catch (e) {
+        churches = [];
+        console.warn('churchdata.json not found:', e);
+      }
       filtered = [...churches];
       renderJurisdictionFilter();
       renderGrid();

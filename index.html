@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Greek Orthodox Churches of North Carolina</title>
-  <link rel="icon" href="https://i.etsystatic.com/19318850/r/il/35c539/7360181136/il_570xN.7360181136_ruho.jpg">
+  <title>Orthodox Churches of North Carolina</title>
+  <link rel="icon" href="churchlogo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -27,8 +27,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'EB Garamond', Georgia, serif;
-      background: var(--white);
+      background-color:  #cccccc;;
       color: var(--text-dark);
       overflow-x: hidden;
     }
@@ -142,7 +141,7 @@
     }
 
     .hero-title {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Palatino Linotype', Palatino;
       font-size: clamp(1.8rem, 5vw, 3.8rem);
       color: var(--white);
       line-height: 1.15;
@@ -238,6 +237,8 @@
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(6px); }
     }
+
+
 
     /* ── NAV ── */
     nav {
@@ -1926,7 +1927,7 @@
         if (!mapsApiKey) return;
         const s = document.createElement('script');
         s.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&callback=initMap`;
-        s.async = true;
+        s.async = true;F
         s.defer = true;
         document.head.appendChild(s);
       } catch(e) {

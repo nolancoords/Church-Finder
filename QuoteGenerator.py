@@ -5,7 +5,7 @@ from flask import Blueprint, jsonify, request
  
 verse_bp = Blueprint("verse_bp", __name__)
  
-# ── Verse pool (book, chapter, verse_number) ──────────────────────────────
+# ── Verse pool (book, chapter, verse_number)
 VERSE_POOL = [
     (bible.Book.JOHN,           3,  16),
     (bible.Book.PSALMS,        23,   1),
@@ -32,7 +32,6 @@ VERSE_POOL = [
     (bible.Book.JAMES,          1,   2),
 ]
  
-# ── Simple in-memory cache ────────────────────────────────────────────────
 _cache: dict = {"date": None, "verse": None}
  
  
@@ -73,8 +72,6 @@ def get_daily_verse(force: bool = False) -> dict:
         _cache["date"]  = today
     return _cache["verse"]
  
- 
-# ── Flask route ───────────────────────────────────────────────────────────
 @verse_bp.route("/api/verse")
 def verse_endpoint():
     """
@@ -85,7 +82,6 @@ def verse_endpoint():
     force = request.args.get("refresh", "0") == "1"
  
     if force:
-        # For a forced refresh we pick a truly random verse (not date-seeded)
         book, chapter, verse_num = random.choice(VERSE_POOL)
         verse_id = bible.get_verse_id(book, chapter, verse_num)
         text = bible.get_verse_text(verse_id)
