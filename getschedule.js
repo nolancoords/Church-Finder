@@ -10,7 +10,6 @@ import NodeCache from 'node-cache';
 
 
 
-
 const myCache        = new NodeCache({ stdTTL: 3600});
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const app            = express();
@@ -188,8 +187,11 @@ setInterval(async () => {
   }
 }, 15 * 60 * 1000);
 
-app.get("/verse", async (req, res) => {
-  const response = await fetch("http://localhost:5000/api/verse"); // was /verse
+app.get("/api/verse", async (req, res) => {
+  const url = req.query.refresh === '1'
+    ? "http://localhost:5000/api/verse?refresh=1"
+    : "http://localhost:5000/api/verse";
+  const response = await fetch(url);
   const data = await response.json();
   res.json(data);
 });

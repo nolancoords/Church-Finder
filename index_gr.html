@@ -935,7 +935,7 @@
 
     async function loadChurches() {
       try {
-        const res = await fetch('churchdata.json');
+        const res = await fetch('/churchdata.json');
         churches = await res.json();
       } catch (e) {
         churches = [];
