@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — Orthodox Churches of North Carolina</title>
+  <link rel="icon" href="churchlogo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #0d1e3d;
+      --royal:      #1a3a6e;
+      --cobalt:     #1e4fc2;
+      --sky:        #4a8fd4;
+      --gold:       #c9a227;
+      --gold-light: #e8c84a;
+      --gold-pale:  #f5e8a3;
+      --white:      #fdfbf5;
+      --off-white:  #f0ead8;
+      --text-dark:  #0d1e3d;
+      --text-mid:   #2c4a80;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #cccccc;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,30,61,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,162,39,0.3);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(253,251,245,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nav-back:hover { color: var(--gold-light); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f2347 60%, var(--navy) 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(201,162,39,0.25);
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-cross {
+      font-size: 2.2rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+    .page-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .page-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      opacity: 0.8;
+    }
+    .page-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.5rem auto 0;
+    }
+
+    /* ── CONTENT ── */
+    .content-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    /* Floating card background */
+    .policy-card {
+      background: var(--white);
+      border: 1px solid rgba(201,162,39,0.2);
+      border-top: 4px solid var(--gold);
+      padding: 3rem 3.5rem;
+      box-shadow: 0 8px 40px rgba(13,30,61,0.1);
+    }
+
+    .effective-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(201,162,39,0.2);
+    }
+
+    .policy-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .policy-section-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--navy);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .policy-section-heading::before {
+      content: '☩';
+      color: var(--gold);
+      font-size: 0.85rem;
+    }
+
+    .policy-section p,
+    .policy-section li {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #2a3a5c;
+    }
+
+    .policy-section ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
+
+    .policy-section ul li {
+      padding: 0.35rem 0 0.35rem 1.5rem;
+      position: relative;
+    }
+    .policy-section ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.65rem;
+      top: 0.55rem;
+    }
+
+    .policy-section a {
+      color: var(--text-mid);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .policy-section a:hover { color: var(--gold); }
+
+    /* Callout / notice box */
+    .policy-note {
+      background: rgba(201,162,39,0.06);
+      border: 1px solid rgba(201,162,39,0.25);
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.3rem;
+      margin: 1rem 0;
+    }
+    .policy-note p {
+      font-family: 'Josefin Sans', sans-serif !important;
+      font-size: 0.88rem !important;
+      line-height: 1.65 !important;
+      color: var(--text-mid) !important;
+    }
+
+    .policy-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent);
+      margin: 2.5rem 0;
+    }
+
+    .policy-contact {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1.5rem 2rem;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .policy-contact p {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+      color: rgba(253,251,245,0.8) !important;
+    }
+    .policy-contact a {
+      color: var(--gold-light) !important;
+      text-decoration: none;
+    }
+    .policy-contact a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(253,251,245,0.6);
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(201,162,39,0.25);
+    }
+    .footer-cross { font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
+    .footer-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    footer p { font-size: 0.82rem; line-height: 1.7; }
+    footer a { color: var(--gold-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .policy-card { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-logo">☩ Orthodox NC</a>
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Directory
+    </a>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-cross">☩</div>
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-subtitle">Orthodox Churches of North Carolina</p>
+      <div class="page-divider"></div>
+    </div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="content-wrap">
+    <div class="policy-card">
+
+      <div class="effective-date">✦ &nbsp; Effective Date: January 1, 2025 &nbsp; ✦ &nbsp; Last Updated: <span id="lastUpdated"></span></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Overview</h2>
+        <p>
+          Orthodox Churches of North Carolina ("we," "our," or "this directory") is a community
+          resource maintained by volunteers for the benefit of the Orthodox faithful and inquirers
+          throughout North Carolina. This Privacy Policy explains what information we collect,
+          how we use it, and your rights regarding that information. We are committed to handling
+          any data with care and transparency.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Information We Collect</h2>
+        <p>We collect a limited amount of information in the following ways:</p>
+        <ul>
+          <li><strong>Information you provide voluntarily</strong> — If you submit a review, correction request, or contact us by email, we receive whatever you choose to share (e.g., your name, email address, and message).</li>
+          <li><strong>Automatically collected data</strong> — Like most websites, our server may log standard technical information such as your IP address, browser type, referring URL, and pages visited. This data is used solely for diagnosing errors and understanding aggregate traffic. It is not linked to any personally identifiable profile.</li>
+          <li><strong>Local browser storage</strong> — We store today's scripture verse in your browser's <code>localStorage</code> so it loads quickly on return visits. No personal data is involved and this storage never leaves your device.</li>
+        </ul>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Parish &amp; Clergy Information</h2>
+        <p>
+          All parish data — including church names, addresses, service times, website URLs, and
+          clergy names and contact details — is sourced from publicly available parish websites,
+          official diocesan directories, and Google Calendar feeds that parishes have made public.
+          We do not publish any information that is not already publicly accessible.
+        </p>
+        <div class="policy-note">
+          <p>If you are a member of the clergy or a parish administrator and wish to update, correct,
+          or remove information about your parish, please <a href="mailto:nolancoords@gmail.com">contact us</a>
+          and we will respond promptly.</p>
+        </div>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">How We Use Information</h2>
+        <p>Any information collected is used only to:</p>
+        <ul>
+          <li>Operate and improve this directory</li>
+          <li>Respond to your messages or correction requests</li>
+          <li>Diagnose technical issues</li>
+          <li>Understand broad, anonymous usage patterns</li>
+        </ul>
+        <p style="margin-top:0.75rem;">
+          We do <strong>not</strong> sell, rent, trade, or share your personal information with
+          third parties for marketing purposes. We do not run advertising of any kind.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Third-Party Services</h2>
+        <p>This site may interact with the following third-party services, each governed by their own privacy policies:</p>
+        <ul>
+          <li><strong>Google Maps API</strong> — Used to display the parish map. Google may collect usage data per the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+          <li><strong>Google Fonts</strong> — Fonts are loaded from Google's servers. Google may log font requests per their privacy policy.</li>
+          <li><strong>Google Calendar</strong> — Parish service schedules are pulled from publicly shared Google Calendars. No personal data is transmitted.</li>
+        </ul>
+        <div class="policy-note">
+          <p>We recommend reviewing Google's privacy policy if you have concerns about data collected by their services. We have no control over their data practices.</p>
+        </div>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Cookies</h2>
+        <p>
+          This site does not use tracking cookies or advertising cookies. We use browser
+          <code>localStorage</code> (not cookies) for the scripture verse cache described above.
+          No cross-site tracking occurs.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Children's Privacy</h2>
+        <p>
+          This directory is a general community resource and is not directed at children under
+          the age of 13. We do not knowingly collect personal information from children. If you
+          believe we have inadvertently received information from a child, please contact us and
+          we will delete it promptly.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Data Retention &amp; Security</h2>
+        <p>
+          Contact form submissions and emails are retained only as long as necessary to respond
+          to your inquiry and are then deleted. We take reasonable precautions to protect
+          information in our possession, though no internet transmission is completely secure.
+          We encourage you not to send sensitive personal information via email.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Your Rights</h2>
+        <p>You may, at any time:</p>
+        <ul>
+          <li>Request to know what personal information (if any) we hold about you</li>
+          <li>Request correction or deletion of your information</li>
+          <li>Ask us to remove a review you submitted</li>
+          <li>Request that parish or clergy information be updated or removed</li>
+        </ul>
+        <p style="margin-top:0.75rem;">
+          To exercise any of these rights, contact us at
+          <a href="mailto:nolancoords@gmail.com">nolancoords@gmail.com</a>.
+          We will respond within a reasonable time.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Disclaimer</h2>
+        <p>
+          The information in this directory is provided in good faith for community use. While
+          we make every effort to keep parish details accurate, service times, clergy assignments,
+          and contact information can change without notice. We are not responsible for errors or
+          outdated information. Always verify details directly with the parish before visiting.
+        </p>
+        <p style="margin-top:0.75rem;">
+          This site is an independent community directory and is not an official publication of
+          the Greek Orthodox Archdiocese of America, the Orthodox Church in America, or any other
+          jurisdiction. Jurisdiction names and related marks are the property of their respective
+          organizations and are used for identification purposes only.
+        </p>
+      </div>
+
+      <div class="policy-rule"></div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-heading">Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. Changes will be reflected by a
+          new "Last Updated" date at the top of this page. Continued use of the directory
+          after changes are posted constitutes acceptance of the updated policy.
+        </p>
+      </div>
+
+      <!-- Contact block -->
+      <div class="policy-contact">
+        <p>
+          Questions about this policy or requests regarding your data?<br>
+          <a href="mailto:nolancoords@gmail.com">nolancoords@gmail.com</a>
+        </p>
+      </div>
+
+    </div><!-- end .policy-card -->
+  </div><!-- end .content-wrap -->
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-cross">☩</div>
+    <div class="footer-title">Orthodox Churches of North Carolina</div>
+    <p>
+      <a href="index.html">← Back to Directory</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:nolancoords@gmail.com">Contact</a>
+      &nbsp;·&nbsp;
+      <a href="privacy.html">Privacy Policy</a>
+    </p>
+    <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">
+      &copy; <span id="year"></span> — Orthodox Christian Community Directory
+    </p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastUpdated').textContent =
+      new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  </script>
+</body>
+</html>
