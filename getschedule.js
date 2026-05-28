@@ -10,6 +10,7 @@ import NodeCache from 'node-cache';
 
 
 
+
 const myCache        = new NodeCache({ stdTTL: 3600});
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const app            = express();
@@ -168,7 +169,17 @@ setInterval(async () => {
     if (church.ics) {
       try {
         const data = await ical.async.fromURL(church.ics);
-        // ... transform and sort data ...
+        const now = new Date();
+        const events = Object.values(data)       // ← was missing this assignment
+          .filter(ev => ev.type === "VEVENT" && new Date(ev.start) >= now)
+          .map(ev => ({
+            summary: ev.summary,
+            start: ev.start,
+            end: ev.end,
+            location: ev.location,
+          }))
+          .sort((a, b) => new Date(a.start) - new Date(b.start))
+          .slice(0, 20);
         myCache.set(`schedule_${church.id}`, events);
       } catch (e) {
         console.error(`Failed background sync for ${church.id}`);
@@ -177,12 +188,8 @@ setInterval(async () => {
   }
 }, 15 * 60 * 1000);
 
-
 app.get("/verse", async (req, res) => {
-  const response = await fetch("http://localhost:5000/verse");
+  const response = await fetch("http://localhost:5000/api/verse"); // was /verse
   const data = await response.json();
-
   res.json(data);
 });
-
-app.listen(3000, () => console.log("JS server running"));
