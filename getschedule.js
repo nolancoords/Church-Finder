@@ -9,23 +9,26 @@ import fs from "fs";
 import NodeCache from 'node-cache';
 import rateLimit from "express-rate-limit";
 
-
-
-const myCache        = new NodeCache({ stdTTL: 3600});
+// 1. Initializations & Config
+const myCache        = new NodeCache({ stdTTL: 3600 });
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const app            = express();
 const __filename     = fileURLToPath(import.meta.url);
 const __dirname      = path.dirname(__filename);
 const anthropic      = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+// Critical: Trust reverse proxies (Heroku, Render, AWS, etc.) so IP tracking works
+app.set('trust proxy', 1);
 
+// Global Middlewares
 app.use(express.json());
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const db             = admin.firestore();
-let churchCache       = null;
+const db = admin.firestore();
+let churchCache = null;
 
 function getChurches() {
   if (!churchCache) {
@@ -34,6 +37,29 @@ function getChurches() {
   return churchCache;
 }
 
+// 2. Rate Limiter Definitions
+// Global rate limiter for standard, lightweight endpoints
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 60, // limit each IP to 60 requests/min
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Strict rate limiter for expensive DB writes and AI generations
+const strictLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // limit each IP to 5 requests per 15 minutes
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many requests down this avenue. Please try again later." }
+});
+
+// Apply global rate limiting to all /api routes safely BEFORE routes are initialized
+app.use("/api", apiLimiter);
+
+
+// 3. API Routes
 app.get('/api/config', (req, res) => {
   res.json({ mapsApiKey: process.env.MAPS_API_KEY });
 });
@@ -54,11 +80,20 @@ app.get("/api/reviews/:id", async (req, res) => {
   }
 });
 
-app.post("/api/reviews/:id", async (req, res) => {
+// Protected with strictLimiter and data validation
+app.post("/api/reviews/:id", strictLimiter, async (req, res) => {
   const { text, author } = req.body;
 
   if (!text || !text.trim()) {
     return res.status(400).json({ error: "Review text required" });
+  }
+
+  // Prevent massive payloads flooding Firestore or crashing the server
+  if (text.length > 1000) {
+    return res.status(400).json({ error: "Review must be under 1000 characters." });
+  }
+  if (author && author.length > 100) {
+    return res.status(400).json({ error: "Author name must be under 100 characters." });
   }
 
   try {
@@ -78,9 +113,10 @@ app.post("/api/reviews/:id", async (req, res) => {
   }
 });
 
-app.get("/api/reviews/:id/overview", async (req, res) => {
-  const cacheKey  = `overview_${req.params.id}`;
-  const cached    = myCache.get(cacheKey);
+// Protected with strictLimiter to prevent AI budget drainage
+app.get("/api/reviews/:id/overview", strictLimiter, async (req, res) => {
+  const cacheKey = `overview_${req.params.id}`;
+  const cached   = myCache.get(cacheKey);
   if (cached) return res.json({ overview: cached });
 
   try {
@@ -105,7 +141,7 @@ app.get("/api/reviews/:id/overview", async (req, res) => {
       .join("\n");
 
     const message = await anthropic.messages.create({
-      model: "claude-opus-4-5",
+      model: "claude-3-5-sonnet-latest", // Updated to a robust production-ready model identifier
       max_tokens: 300,
       messages: [{
         role: "user",
@@ -115,15 +151,14 @@ ${reviewText}`
       }]
     });
 
-    const overview    = message.content[0].text;
-    myCache.set(cacheKey, overview);       // ← cache before responding
+    const overview = message.content[0].text;
+    myCache.set(cacheKey, overview);
     res.json({ overview });
 
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 app.get("/api/schedule/:id", async (req, res) => {
   const churches = getChurches(); 
@@ -132,13 +167,14 @@ app.get("/api/schedule/:id", async (req, res) => {
   if (!church) return res.status(404).json({ error: "Church not found" });
   if (!church.ics) return res.status(404).json({ error: "No ICS feed" });
 
-  const cacheKey  = `schedule_${req.params.id}`;
-  const cache     = myCache.get(cacheKey)
+  const cacheKey = `schedule_${req.params.id}`;
+  const cache    = myCache.get(cacheKey);
   if (cache) return res.json(cache);
-    try {
-    const data    = await ical.async.fromURL(church.ics);
-    const now     = new Date();
-    const events  = Object.values(data)
+
+  try {
+    const data  = await ical.async.fromURL(church.ics);
+    const now   = new Date();
+    const events = Object.values(data)
       .filter(ev => ev.type === "VEVENT" && new Date(ev.start) >= now)
       .map(ev => ({
         summary: ev.summary,
@@ -163,6 +199,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+// 4. Background Syncur
 setInterval(async () => {
   const churches = getChurches();
   for (const church of churches) {
@@ -170,7 +207,7 @@ setInterval(async () => {
       try {
         const data = await ical.async.fromURL(church.ics);
         const now = new Date();
-        const events = Object.values(data)       // ← was missing this assignment
+        const events = Object.values(data)
           .filter(ev => ev.type === "VEVENT" && new Date(ev.start) >= now)
           .map(ev => ({
             summary: ev.summary,
@@ -189,9 +226,7 @@ setInterval(async () => {
 }, 15 * 60 * 1000);
 
 
-
-
-
+// 5. Verses Framework
 const VERSE_POOL = [
   { book: "JOHN",         chapter: 3,  verse: 16, text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." },
   { book: "PSALMS",       chapter: 23, verse: 1,  text: "The Lord is my shepherd; I shall not want." },
@@ -227,7 +262,6 @@ function todayUTC() {
 function getDailyVerse() {
   const today = todayUTC();
   if (verseCache.date !== today) {
-    // Seed with date so it's consistent all day
     const seed = today.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
     const index = seed % VERSE_POOL.length;
     verseCache = { date: today, verse: { ...VERSE_POOL[index], date: today } };
@@ -243,14 +277,3 @@ app.get("/api/verse", (req, res) => {
   }
   res.json(getDailyVerse());
 });
-
-
-
-const apiLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 60, // limit each IP to 60 requests/min
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-app.use("/api", apiLimiter);
