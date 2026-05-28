@@ -7,7 +7,7 @@ import ical from "node-ical";
 import Anthropic from "@anthropic-ai/sdk";
 import fs from "fs";
 import NodeCache from 'node-cache';
-
+import rateLimit from "express-rate-limit";
 
 
 
@@ -25,8 +25,8 @@ admin.initializeApp({
 });
 
 const db             = admin.firestore();
+let churchCache       = null;
 
-let churchCache = null;
 function getChurches() {
   if (!churchCache) {
     churchCache = JSON.parse(fs.readFileSync("./churchdata.json", "utf-8"));
@@ -243,3 +243,14 @@ app.get("/api/verse", (req, res) => {
   }
   res.json(getDailyVerse());
 });
+
+
+
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 60, // limit each IP to 60 requests/min
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use("/api", apiLimiter);
