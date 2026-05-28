@@ -831,7 +831,7 @@
     </p>
   </section>
 
-  <!-- ── FOOTER ── */
+
   <footer>
     <div class="footer-cross">☩</div>
     <div class="footer-title">Ορθόδοξες Εκκλησίες Βόρειας Καρολίνας</div>
@@ -937,14 +937,23 @@
       try {
         const res = await fetch('/churchdata.json');
         churches = await res.json();
+
+        filtered = [...churches];
+
+        console.log("DATA LOADED:", churches.length);
+
+        renderJurisdictionFilter();
+        console.log("Filter OK");
+
+        renderGrid();
+        console.log("Grid OK");
+
+        renderMapSidebar();
+        console.log("Sidebar OK");
+
       } catch (e) {
-        churches = [];
-        console.warn('churchdata.json not found:', e);
+        console.error("LOAD ERROR:", e);
       }
-      filtered = [...churches];
-      renderJurisdictionFilter();
-      renderGrid();
-      renderMapSidebar();
     }
 
     function getPriestInfo(churchId) {

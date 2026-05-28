@@ -957,7 +957,7 @@
     <a href="index.html" class="lang-btn active">
       <span class="lang-flag">🇺🇸</span> English
     </a>
-    <a href="index_gr.html" class="lang-btn">
+    <a href="greek.html" class="lang-btn">
       <span class="lang-flag">🇬🇷</span> Ελληνικά
     </a>
   </div>
@@ -1233,16 +1233,32 @@
     ───────────────────────────────────────────────── */
     async function loadChurches() {
       try {
-        const res = await fetch('churchdata.json');
+        const res = await fetch('/churchdata.json');
         churches = await res.json();
       } catch (e) {
+        console.warn('JSON error:', e);
         churches = [];
-        console.warn('churchdata.json not found:', e);
       }
+
       filtered = [...churches];
-      renderJurisdictionFilter();
-      renderGrid();
-      renderMapSidebar();
+
+      try {
+        renderJurisdictionFilter();
+      } catch (e) {
+        console.error("Filter render broke:", e);
+      }
+
+      try {
+        renderGrid();
+      } catch (e) {
+        console.error("Grid render broke:", e);
+      }
+
+      try {
+        renderMapSidebar();
+      } catch (e) {
+        console.error("Sidebar render broke:", e);
+      }
     }
 
     /* ─────────────────────────────────────────────────
