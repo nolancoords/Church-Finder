@@ -964,7 +964,7 @@
 
   <!-- ── NAV ── -->
   <nav>
-    <div class="nav-logo">☩ GOC North Carolina</div>
+    <div class="nav-logo">☩ Orthodox Churches in North Carolina</div>
     <ul class="nav-links">
       <li><a href="#churches">Find a Church</a></li>
       <li><a href="#map-section">Map</a></li>
@@ -1233,32 +1233,16 @@
     ───────────────────────────────────────────────── */
     async function loadChurches() {
       try {
-        const res = await fetch('/churchdata.json');
+        const res = await fetch('churchdata.json');
         churches = await res.json();
       } catch (e) {
-        console.warn('JSON error:', e);
         churches = [];
+        console.warn('churchdata.json not found:', e);
       }
-
       filtered = [...churches];
-
-      try {
-        renderJurisdictionFilter();
-      } catch (e) {
-        console.error("Filter render broke:", e);
-      }
-
-      try {
-        renderGrid();
-      } catch (e) {
-        console.error("Grid render broke:", e);
-      }
-
-      try {
-        renderMapSidebar();
-      } catch (e) {
-        console.error("Sidebar render broke:", e);
-      }
+      renderJurisdictionFilter();
+      renderGrid();
+      renderMapSidebar();
     }
 
     /* ─────────────────────────────────────────────────
