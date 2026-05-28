@@ -10,6 +10,7 @@ import NodeCache from 'node-cache';
 
 
 
+
 const myCache        = new NodeCache({ stdTTL: 3600});
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const app            = express();
@@ -187,11 +188,58 @@ setInterval(async () => {
   }
 }, 15 * 60 * 1000);
 
-app.get("/api/verse", async (req, res) => {
-  const url = req.query.refresh === '1'
-    ? "http://localhost:5000/api/verse?refresh=1"
-    : "http://localhost:5000/api/verse";
-  const response = await fetch(url);
-  const data = await response.json();
-  res.json(data);
+
+
+
+
+const VERSE_POOL = [
+  { book: "JOHN",         chapter: 3,  verse: 16, text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." },
+  { book: "PSALMS",       chapter: 23, verse: 1,  text: "The Lord is my shepherd; I shall not want." },
+  { book: "PSALMS",       chapter: 23, verse: 4,  text: "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me." },
+  { book: "PSALMS",       chapter: 46, verse: 1,  text: "God is our refuge and strength, a very present help in trouble." },
+  { book: "PROVERBS",     chapter: 3,  verse: 5,  text: "Trust in the Lord with all thine heart; and lean not unto thine own understanding." },
+  { book: "PROVERBS",     chapter: 3,  verse: 6,  text: "In all thy ways acknowledge him, and he shall direct thy paths." },
+  { book: "ROMANS",       chapter: 8,  verse: 28, text: "And we know that all things work together for good to them that love God." },
+  { book: "ROMANS",       chapter: 8,  verse: 31, text: "If God be for us, who can be against us?" },
+  { book: "ROMANS",       chapter: 10, verse: 9,  text: "That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved." },
+  { book: "ROMANS",       chapter: 12, verse: 2,  text: "And be not conformed to this world: but be ye transformed by the renewing of your mind." },
+  { book: "MATTHEW",      chapter: 5,  verse: 9,  text: "Blessed are the peacemakers: for they shall be called the children of God." },
+  { book: "MATTHEW",      chapter: 5,  verse: 14, text: "Ye are the light of the world. A city that is set on an hill cannot be hid." },
+  { book: "MATTHEW",      chapter: 6,  verse: 33, text: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you." },
+  { book: "MATTHEW",      chapter: 11, verse: 28, text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest." },
+  { book: "ISAIAH",       chapter: 40, verse: 31, text: "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles." },
+  { book: "ISAIAH",       chapter: 41, verse: 10, text: "Fear thou not; for I am with thee: be not dismayed; for I am thy God." },
+  { book: "JOSHUA",       chapter: 1,  verse: 9,  text: "Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee." },
+  { book: "GALATIANS",    chapter: 5,  verse: 22, text: "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith." },
+  { book: "PHILIPPIANS",  chapter: 4,  verse: 13, text: "I can do all things through Christ which strengtheneth me." },
+  { book: "PHILIPPIANS",  chapter: 4,  verse: 6,  text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God." },
+  { book: "HEBREWS",      chapter: 11, verse: 1,  text: "Now faith is the substance of things hoped for, the evidence of things not seen." },
+  { book: "JAMES",        chapter: 1,  verse: 5,  text: "If any of you lack wisdom, let him ask of God, that giveth to all men liberally." },
+  { book: "JAMES",        chapter: 1,  verse: 2,  text: "My brethren, count it all joy when ye fall into divers temptations." },
+];
+
+let verseCache = { date: null, verse: null };
+
+function todayUTC() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function getDailyVerse() {
+  const today = todayUTC();
+  if (verseCache.date !== today) {
+    // Seed with date so it's consistent all day
+    const seed = today.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+    const index = seed % VERSE_POOL.length;
+    verseCache = { date: today, verse: { ...VERSE_POOL[index], date: today } };
+  }
+  return verseCache.verse;
+}
+
+app.get("/api/verse", (req, res) => {
+  const force = req.query.refresh === '1';
+  if (force) {
+    const index = Math.floor(Math.random() * VERSE_POOL.length);
+    return res.json({ ...VERSE_POOL[index], date: todayUTC() });
+  }
+  res.json(getDailyVerse());
 });
