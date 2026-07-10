@@ -746,6 +746,86 @@
     ],
     "hasCalendar": false,
     "languages": ["Greek", "English"] 
+  },
+{
+    "id": "st-innocent-macon",
+    "jurisdiction": "OCA",
+    "name": "St. Innocent Orthodox Evangelism Mission",
+    "patron": "Saint Innocent of Alaska",
+    "city": "Macon",
+    "state": "NC",
+    "address": "153 Oak Ln, Macon, NC 27551",
+    "phone": "(252) 257-2342",
+    "website": "https://www.stinnocentnc.org/",
+    "contactInfo": {
+      "Fr. Alexander": {
+        "name": "Fr. Alexander Atty",
+        "rank": "Proistamenos",
+        "email": "",
+        "phone": ""
+      }
+    },
+    "lat": 36.4357,
+    "lng": -78.0772,
+    "hasCalendar": false,
+    "services": [
+      "Hours: Sun 9:40 AM",
+      "Divine Liturgy: Sun 10:00 AM"
+    ],
+    "languages": ["English"]
+  },
+  {
+    "id": "holy-resurrection-claremont",
+    "jurisdiction": "ROCOR",
+    "name": "Holy Resurrection Orthodox Church",
+    "patron": "Resurrection of Christ",
+    "city": "Claremont",
+    "state": "NC",
+    "address": "3429 C and B Farm Rd, Claremont, NC 28610",
+    "phone": "(828) 459-2411",
+    "website": "",
+    "contactInfo": {
+      "Fr. Matthew": {
+        "name": "Fr. Matthew Lowery",
+        "rank": "Proistamenos",
+        "email": "",
+        "phone": ""
+      }
+    },
+    "lat": 35.6982,
+    "lng": -81.1448,
+    "hasCalendar": false,
+    "services": [
+      "Vespers: Sat 6:00 PM",
+      "Divine Liturgy: Sun 9:30 AM"
+    ],
+    "languages": ["English", "Church Slavonic"]
+  },
+  {
+    "id": "st-stephen-camp-legeune",
+    "jurisdiction": "GOARCH",
+    "name": "St. Stephen Orthodox Christian Fellowship",
+    "patron": "Saint Stephen the Protomartyr",
+    "city": "Camp Lejeune",
+    "state": "NC",
+    "address": "Building 67 (Mainside Chapel), Camp Lejeune, NC 28547",
+    "phone": "(910) 451-3210",
+    "website": "",
+    "contactInfo": {
+      "Military Chaplain": {
+        "name": "",
+        "rank": "Chaplain",
+        "email": "",
+        "phone": ""
+      }
+    },
+    "lat": 34.6952,
+    "lng": -77.3364,
+    "hasCalendar": false,
+    "services": [
+      "Divine Liturgy: Sun 9:00 AM (Check base schedule)"
+    ],
+    "languages": ["English"]
   }
 
 
