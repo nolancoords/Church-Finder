@@ -1612,6 +1612,23 @@
     }
 
     /* ─────────────────────────────────────────────────
+       MAP MARKER COLOR BY JURISDICTION
+    ───────────────────────────────────────────────── */
+    function markerColor(j) {
+      if (!j) return { fill: '#c9a227', stroke: '#0d1e3d' }; // default — gold
+      const map = {
+        'goarch':     { fill: '#0d1e3d', stroke: '#c9a227' }, // Greek — dark blue
+        'oca':        { fill: '#6fb8e8', stroke: '#0d1e3d' }, // OCA — light blue
+        'rocor':      { fill: '#7a0e0e', stroke: '#0d1e3d' }, // Russian — dark red
+        'romanian':   { fill: '#e8837e', stroke: '#0d1e3d' }, // Romanian — light red
+        'antioch':    { fill: '#ffffff', stroke: '#0d1e3d' }, // Antiochian — white
+        'aocana':     { fill: '#ffffff', stroke: '#0d1e3d' },
+        'antiochian': { fill: '#ffffff', stroke: '#0d1e3d' },
+      };
+      return map[j.toLowerCase()] || { fill: '#c9a227', stroke: '#0d1e3d' };
+    }
+
+    /* ─────────────────────────────────────────────────
        GOOGLE MAPS
     ───────────────────────────────────────────────── */
     function initMap() {
@@ -1641,15 +1658,16 @@
       const infoWindow = new google.maps.InfoWindow();
 
       filtered.forEach(c => {
+        const colors = markerColor(c.jurisdiction);
         const marker = new google.maps.Marker({
           position: { lat: c.lat, lng: c.lng },
           map: googleMap,
           title: c.name,
           icon: {
             path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z',
-            fillColor: '#c9a227',
+            fillColor: colors.fill,
             fillOpacity: 1,
-            strokeColor: '#0d1e3d',
+            strokeColor: colors.stroke,
             strokeWeight: 1.5,
             scale: 1.5,
             anchor: new google.maps.Point(12, 22)
