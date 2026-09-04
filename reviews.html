@@ -261,6 +261,13 @@
     let reviewCounts = {};
     let currentChurchId = null;
 
+    // Escape user input before inserting into HTML (XSS).
+    function escapeHTML(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
     async function init() {
       try {
         const res = await fetch('churchdata.json');
@@ -336,9 +343,9 @@
       const reviewsHTML = reviews.length
         ? reviews.map(r => `
             <div class="review-entry">
-              <div class="review-entry-author">☩ ${r.author}</div>
+              <div class="review-entry-author">☩ ${escapeHTML(r.author)}</div>
               <div class="review-entry-date">${new Date(r.date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })}</div>
-              <div class="review-entry-text">${r.text}</div>
+              <div class="review-entry-text">${escapeHTML(r.text)}</div>
             </div>
           `).join('')
         : `<p class="no-reviews">No reviews yet — be the first to share your experience.</p>`;
@@ -424,9 +431,9 @@
 
         document.getElementById('existingReviews').innerHTML = reviews.map(rv => `
           <div class="review-entry">
-            <div class="review-entry-author">☩ ${rv.author}</div>
+            <div class="review-entry-author">☩ ${escapeHTML(rv.author)}</div>
             <div class="review-entry-date">${new Date(rv.date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })}</div>
-            <div class="review-entry-text">${rv.text}</div>
+            <div class="review-entry-text">${escapeHTML(rv.text)}</div>
           </div>
         `).join('');
 

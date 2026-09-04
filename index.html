@@ -1148,6 +1148,13 @@
     let visibleCount     = PAGE_SIZE;
     let acHighlight      = -1;
 
+    // Escape user input before inserting into HTML (XSS).
+    function escapeHTML(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
     /* ─────────────────────────────────────────────────
        DAILY SCRIPTURE
     ───────────────────────────────────────────────── */
@@ -1873,7 +1880,7 @@
                         text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">
               ✦ AI Overview
             </div>
-            <p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${overview}</p>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${escapeHTML(overview)}</p>
           </div>`;
       } catch {
         section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Could not load overview.</p>`;
@@ -1901,8 +1908,8 @@
                         background:rgba(201,162,39,0.04);">
               <div style="font-family:'Josefin Sans',sans-serif;font-size:0.72rem;
                           letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
-                          margin-bottom:0.2rem;">☩ ${r.author}</div>
-              <div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${r.text}</div>
+                          margin-bottom:0.2rem;">☩ ${escapeHTML(r.author)}</div>
+              <div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${escapeHTML(r.text)}</div>
             </div>
           `).join('')}
           <a href="reviews.html" style="font-family:'Cinzel',serif;font-size:0.72rem;
