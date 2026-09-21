@@ -866,6 +866,13 @@
     let visibleCount   = PAGE_SIZE;
     let acHighlight    = -1;
 
+    // Escape user input before inserting into HTML (XSS).
+    function escapeHTML(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
     /* ── DAILY SCRIPTURE ── */
     const VERSE_CACHE_KEY      = 'oc_daily_verse';
     const VERSE_CACHE_DATE_KEY = 'oc_daily_verse_date';
@@ -1278,7 +1285,7 @@
       try {
         const res = await fetch(`/api/reviews/${id}/overview`);
         const { overview } = await res.json();
-        section.innerHTML = `<div style="border-left:3px solid var(--gold);padding:1rem 1.2rem;background:rgba(201,162,39,0.06);margin-top:0.5rem;"><div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">✦ Παρουσίαση AI</div><p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${overview}</p></div>`;
+        section.innerHTML = `<div style="border-left:3px solid var(--gold);padding:1rem 1.2rem;background:rgba(201,162,39,0.06);margin-top:0.5rem;"><div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">✦ Παρουσίαση AI</div><p style="font-size:0.95rem;line-height:1.8;color:var(--text-dark);">${escapeHTML(overview)}</p></div>`;
       } catch { section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Δεν ήταν δυνατή η φόρτωση της παρουσίασης.</p>`; }
     }
 
@@ -1289,7 +1296,7 @@
         const res = await fetch(`/api/reviews/${id}`);
         const reviews = await res.json();
         if (!reviews.length) { section.innerHTML = `<p style="font-family:'Josefin Sans',sans-serif;font-size:0.85rem;color:var(--text-mid);font-style:italic;">Δεν υπάρχουν κριτικές ακόμα. <a href="reviews.html" style="color:var(--gold);">Γίνετε ο πρώτος ↗</a></p>`; return; }
-        section.innerHTML = `<div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.75rem;">✎ Κριτικές</div>${reviews.map(r=>`<div style="padding:0.9rem;border:1px solid rgba(201,162,39,0.18);border-left:3px solid var(--gold);margin-bottom:0.75rem;background:rgba(201,162,39,0.04);"><div style="font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem;">☩ ${r.author}</div><div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${r.text}</div></div>`).join('')}<a href="reviews.html" style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;">✎ Γράψτε Κριτική ↗</a>`;
+        section.innerHTML = `<div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.75rem;">✎ Κριτικές</div>${reviews.map(r=>`<div style="padding:0.9rem;border:1px solid rgba(201,162,39,0.18);border-left:3px solid var(--gold);margin-bottom:0.75rem;background:rgba(201,162,39,0.04);"><div style="font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem;">☩ ${escapeHTML(r.author)}</div><div style="font-size:0.95rem;line-height:1.7;color:var(--text-dark);">${escapeHTML(r.text)}</div></div>`).join('')}<a href="reviews.html" style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;">✎ Γράψτε Κριτική ↗</a>`;
       } catch { section.innerHTML = `<p style="color:var(--text-mid);font-size:0.85rem;">Δεν ήταν δυνατή η φόρτωση των κριτικών.</p>`; }
     }
 
